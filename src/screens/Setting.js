@@ -1,5 +1,4 @@
 import React from 'react';
-import { roundToNearestPixel } from 'react-native/Libraries/Utilities/PixelRatio';
 import styled from 'styled-components/native';
 
 const Container = styled.View`
@@ -13,14 +12,12 @@ const StyledText = styled.Text`
   margin-bottom: 10px;
 `;
 
-const Group = ({ route }) => {
+const Setting = () => {
   return (
     <Container>
-      <StyledText>Group</StyledText>
-      <StyledText>ID: {route.params.id}</StyledText>
-      <StyledText>Name: {route.params.name}</StyledText>
+      <StyledText>Setting</StyledText>
     </Container>
   );
 };
 
-export default Group;
+export default Setting;

@@ -5,6 +5,7 @@ const colors = {
     grey_1: '#a6a6a6',
     red: '#e84118',
     blue: '#3679fe',
+    green: '#9CC27E'
 };
   
 export const theme = {
@@ -14,4 +15,5 @@ export const theme = {
     label: colors.grey_1,
     inputPlaceholder: colors.grey_1,
     inputBorder: colors.grey_1,
+    headerTintColor: colors.green
 };

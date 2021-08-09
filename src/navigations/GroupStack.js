@@ -1,19 +1,16 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Home, Alert, Setting } from '../screens';
+import { GroupList, Group } from '../screens';
 import { AntDesign } from '@expo/vector-icons'; 
-import GroupStack from './GroupStack';
-import CourseStack from './CourseStack';
-import TreeStack from './TreeStack';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+
 import { Platform } from 'react-native';
 
 const Stack = createStackNavigator();
 
-const MainStack = () => {
+const GroupStack = () => {
   return (
     <Stack.Navigator
-      initialRouteName="Home"
+      initialRouteName="GroupList"
       screenOptions={{
         cardStyle: {backgroundColor: "#ffffff"},
         headerStyle: {
@@ -40,14 +37,10 @@ const MainStack = () => {
         }
       }}
     >
-      <Stack.Screen name="Home" component={Home} options={{ headerTitle: '따숲' }} />
-      <Stack.Screen name="GroupList" component={GroupStack} options={{ headerShown: false }} />
-      <Stack.Screen name="CourseMain" component={CourseStack} options={{ headerShown: false }} />
-      <Stack.Screen name="Tree" component={TreeStack} options={{ headerShown: false }} />
-      <Stack.Screen name="Alert" component={Alert} options={{ headerTitle: '알림' }} />
-      <Stack.Screen name="Setting" component={Setting} options={{ headerTitle: '설정' }} />      
+      <Stack.Screen name="GroupList" component={GroupList} options={{ headerTitle: '숲' }} />
+      <Stack.Screen name="Group" component={Group} options={{ headerTitle: '숲 상세 보기' }} />   
     </Stack.Navigator>
   );
 };
 
-export default MainStack;
+export default GroupStack;
