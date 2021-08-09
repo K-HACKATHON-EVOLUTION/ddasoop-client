@@ -1,4 +1,5 @@
 import React from 'react';
+import { roundToNearestPixel } from 'react-native/Libraries/Utilities/PixelRatio';
 import styled from 'styled-components/native';
 
 const Container = styled.View`
