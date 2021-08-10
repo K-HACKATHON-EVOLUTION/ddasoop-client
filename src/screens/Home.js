@@ -1,17 +1,12 @@
 import React, { useLayoutEffect } from 'react';
 import styled from 'styled-components/native';
-import { Button, Image, TouchableOpacity } from 'react-native';
-import { AntDesign } from '@expo/vector-icons'; 
+import { Button, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { AntDesign, Feather } from '@expo/vector-icons'; 
 
 const Container = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
-`;
-
-const StyledText = styled.Text`
-  font-size: 30px;
-  margin-bottom: 10px;
 `;
 
 const Home = ({ navigation }) => {
@@ -40,9 +35,10 @@ const Home = ({ navigation }) => {
     })
   }, [])
     return (
+      <ScrollView>
         <Container>
             <TouchableOpacity onPress={() => navigation.navigate('Tree')}>
-              <Image source={require('../../assets/maintree.png')} />
+              <Image source={require('../../assets/maintree.png')} style={{ margin: 250 }}/>
             </TouchableOpacity>
             <Button
               title="코스"
@@ -52,7 +48,12 @@ const Home = ({ navigation }) => {
               title="숲"
               onPress={() => navigation.navigate('GroupList')}
             />
+            <Feather name="chevrons-down" size={25} />
+            <Feather name="chevrons-down" size={25} />
+            <Feather name="chevrons-down" size={25} />
+
         </Container>
+      </ScrollView>
     );
 };
 
