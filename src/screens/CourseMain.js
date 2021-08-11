@@ -14,9 +14,9 @@ const StyledText = styled.Text`
 `;
 
 const groups = [
-    { _id: 1, name: '코스' },
-    { _id: 2, name: '서대문구 코스' },
-    { _id: 3, name: '강남구 코스' },
+    { _id: 1, name: '맛집 탐방 코스' },
+    { _id: 2, name: '한강 코스' },
+    { _id: 3, name: '유적지 코스' },
 ];
 
 const CourseMain = ({ navigation }) => {
