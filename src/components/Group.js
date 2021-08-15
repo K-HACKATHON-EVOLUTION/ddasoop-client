@@ -46,7 +46,9 @@ const Group = ({ navigation }) => {
     <TouchableOpacity onPress={() => console.log('꾹꾹')}>
         <Container>
             <RowWrapper>
-                <StyledImage source={require('../../assets/maintree.png')}></StyledImage>
+                {/* <StyledImage source={require('../../assets/maintree.png')}></StyledImage> */}
+                <StyledImage></StyledImage>
+
                     <ColumnWrapper>
                         <TitleText>서대문구 숲</TitleText>
                         <SubText>멤버 수 10명</SubText>

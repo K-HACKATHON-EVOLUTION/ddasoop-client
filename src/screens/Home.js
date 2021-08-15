@@ -1,12 +1,23 @@
 import React, { useLayoutEffect } from 'react';
 import styled from 'styled-components/native';
-import { Button, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Button, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { AntDesign, Feather } from '@expo/vector-icons'; 
 
 const Container = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
+`;
+const TitleText = styled.Text`
+  font-size: 25px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #848484;
+`;
+const SubText = styled.Text`
+  font-size: 15px;
+  color: gray;
+  margin-bottom: 80px;
 `;
 
 const Home = ({ navigation }) => {
@@ -35,25 +46,35 @@ const Home = ({ navigation }) => {
     })
   }, [])
     return (
-      <ScrollView>
-        <Container>
-            <TouchableOpacity onPress={() => navigation.navigate('Tree')}>
-              <Image source={require('../../assets/maintree.png')} style={{ margin: 250 }}/>
-            </TouchableOpacity>
-            <Button
-              title="코스"
-              onPress={() => navigation.navigate('CourseMain')}
-            />
-            <Button
-              title="숲"
-              onPress={() => navigation.navigate('GroupList')}
-            />
-            <Feather name="chevrons-down" size={25} />
-            <Feather name="chevrons-down" size={25} />
-            <Feather name="chevrons-down" size={25} />
-
-        </Container>
-      </ScrollView>
+      <Container>
+        <ScrollView style={{width:'100%'}}>
+          <Container>
+              <TouchableOpacity onPress={() => navigation.navigate('Tree')}>
+                <Image source={require('../../assets/maintree.png')} style={{ marginTop: 180, marginBottom: 80 }}/>
+              </TouchableOpacity>
+              <TitleText>9.87kg</TitleText>
+              <SubText>총 탄소저감량</SubText>
+              <Feather name="chevrons-down" color='#848484' size={25} style={{marginBottom: 10}} />
+              <Feather name="chevrons-down" color='#848484' size={25} style={{marginBottom: 10}} />
+              <Feather name="chevrons-down" color='#848484' size={25} style={{marginBottom: 10}} />
+              <Image source={require('../../assets/graph.png')} style={{ marginTop: 180, marginBottom: 60 }}/>
+              <Image source={require('../../assets/calendar.png')} style={{ marginBottom: 20 }}/>
+              
+          </Container>
+        </ScrollView>
+        <View style={{flexDirection: 'row', width:'100%', justifyContent: 'center',
+          height: 85, borderTopWidth:'1', borderTopColor: 'lightgray'}}>
+          <TouchableOpacity onPress={() => navigation.navigate('CourseMain')}>
+            <Image source={require('../../assets/course.png')} style={{marginTop:18, marginRight:50}}/>
+          </TouchableOpacity> 
+          <TouchableOpacity onPress={() => navigation.navigate('CourseMain')}>
+            <Image source={require('../../assets/start.png')} style={{marginTop:10}}/>
+          </TouchableOpacity>           
+          <TouchableOpacity onPress={() => navigation.navigate('GroupList')}>
+            <Image source={require('../../assets/group.png')} style={{marginTop:18, marginLeft:50}}/>
+          </TouchableOpacity>
+        </View>
+      </Container>
     );
 };
 

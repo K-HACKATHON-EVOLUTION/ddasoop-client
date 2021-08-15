@@ -51,13 +51,13 @@ const GroupList = ({ navigation }) => {
             <Group/>
             <Group/>
 
-            {groups.map(group => (
+            {/* {groups.map(group => (
                 <Button
                   key={group.id}
                   title={group.name}
                   onPress={() => _onPress(group)}
                 />
-            ))}
+            ))} */}
         </Container>
       </ThemeProvider>
       </ScrollView>
