@@ -41,7 +41,7 @@ const Login = ({ navigation }) => {
         const changedEmail = removeWhitespace(email);
         setEmail(changedEmail);
         setErrorMessage(
-            validateEmail(changedEmail) ? '' : '올바르지 않은 이메일 형식입니다.'
+            validateEmail(changedEmail) ? '' : '이메일 형식을 확인해 주세요.'
         );
     };
     const _handlePasswordChange = password => {
