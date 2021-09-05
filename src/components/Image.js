@@ -2,7 +2,9 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 import { MaterialIcons } from '@expo/vector-icons';
+import { Platform, Alert } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import * as Permissions from 'expo-permissions';
 
 const Container = styled.View`
   align-self: center;
@@ -45,6 +47,26 @@ const PhotoButton = ({ onPress }) => {
 
 
 const Image = ({ url, imageStyle, rounded, showButton, onChangeImage }) => {
+  useEffect(() => {
+    (async () => {
+      try {
+        if (Platform.OS !== 'ios') {
+          const { status } = await Permissions.askAsync(
+            Permissions.MEDIA_LIBRARY
+          );
+          if (status !== 'granted') {
+            Alert.alert(
+              '사진 접근 권한',
+              '사진 접근을 허용해 주세요.'
+            );
+          }
+        }
+      } catch (e) {
+        Alert.alert('접근 권한 에러', e.message);
+      }
+    })();
+  }, []);
+
   const _handleEditButton = async () => {
     try {
       const result = await ImagePicker.launchImageLibraryAsync({
