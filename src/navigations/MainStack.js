@@ -5,7 +5,6 @@ import { AntDesign } from '@expo/vector-icons';
 import GroupStack from './GroupStack';
 import CourseStack from './CourseStack';
 import TreeStack from './TreeStack';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Platform } from 'react-native';
 
 const Stack = createStackNavigator();
