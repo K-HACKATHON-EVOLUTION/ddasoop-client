@@ -40,7 +40,7 @@ const AuthStack = () => {
         component={Login}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="Signup" component={Signup} />
+      <Stack.Screen name="Signup" component={Signup} options={{ headerTitle: '회원가입' }}/>
     </Stack.Navigator>
   );
 };
