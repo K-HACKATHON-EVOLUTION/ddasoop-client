@@ -6,7 +6,7 @@ import MainStack from './MainStack';
 const Navigation = () => {
     return (
       <NavigationContainer>
-        <MainStack />
+        <AuthStack />
       </NavigationContainer>
     );
   };
