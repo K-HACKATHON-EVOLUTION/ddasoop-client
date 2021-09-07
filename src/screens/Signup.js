@@ -111,7 +111,7 @@ const Signup = () => {
                     onChangeText={text => setPassword(removeWhitespace(text))}
                     onSubmitEditing={() => passwordConfirmRef.current.focus()}
                     placeholder="Password"
-                    returnKeyType="done"
+                    returnKeyType="next"
                     isPassword
                 />
                 <Input
@@ -120,7 +120,7 @@ const Signup = () => {
                     value={passwordConfirm}
                     onChangeText={text => setPasswordConfirm(removeWhitespace(text))}
                     onSubmitEditing={_handleSignupButtonPress}
-                    placeholder="Password"
+                    placeholder="Password Confirm"
                     returnKeyType="done"
                     isPassword
                 />
