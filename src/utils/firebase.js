@@ -1,9 +1,9 @@
 import * as firebase from "firebase";
 import config from "../../firebase.json";
 
-const app = firebase.initializeApp(config);
+!firebase.apps.length ? firebase.initializeApp(config) : firebase.app()
 
-const Auth = app.auth();
+const Auth = firebase.auth();
 
 export const login = async ({ email, password }) => {
     const { user } = await Auth.signInWithEmailAndPassword(email, password);
