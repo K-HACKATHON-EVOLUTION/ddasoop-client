@@ -4,6 +4,8 @@ import { Image, Input, Button } from '../components';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { validateEmail, removeWhitespace } from '../utils/common';
 import { images } from '../utils/images';
+import { signup } from '../utils/firebase';
+import { Alert } from 'react-native';
 
 const Container = styled.View`
     justify-content: center;
@@ -62,7 +64,15 @@ const Signup = () => {
         );
     }, [name, email, password, passwordConfirm, errorMessage]);
 
-    const _handleSignupButtonPress = () => {};
+    const _handleSignupButtonPress = async () => {
+        try {
+            const user = await signup({ email, password, name, photoUrl });
+            console.log(user);
+            Alert.alert('Signup Success', user.email);
+        } catch (e) {
+            Alert.alert('Signup Error', e.message);
+        }
+    };
 
     return (
         <KeyboardAwareScrollView extraScrollHeight={20}>
@@ -101,7 +111,7 @@ const Signup = () => {
                     onChangeText={text => setPassword(removeWhitespace(text))}
                     onSubmitEditing={() => passwordConfirmRef.current.focus()}
                     placeholder="Password"
-                    returnKeyType="done"
+                    returnKeyType="next"
                     isPassword
                 />
                 <Input
@@ -110,7 +120,7 @@ const Signup = () => {
                     value={passwordConfirm}
                     onChangeText={text => setPasswordConfirm(removeWhitespace(text))}
                     onSubmitEditing={_handleSignupButtonPress}
-                    placeholder="Password"
+                    placeholder="Password Confirm"
                     returnKeyType="done"
                     isPassword
                 />
