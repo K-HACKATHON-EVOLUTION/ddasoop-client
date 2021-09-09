@@ -31,5 +31,9 @@ export const theme = {
     inputPlaceholder: colors.grey_1,
     inputBorder: colors.grey_1,
     headerTintColor: colors.color_3,
-    focus: colors.green_3
+    focus: colors.green_3,
+
+
+    spinnerBackground: colors.black,
+    spinnerIndicator: colors.white,
 };
