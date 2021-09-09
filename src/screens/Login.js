@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useContext, useState, useRef, useEffect } from 'react';
 import { Alert } from 'react-native';
 import styled from 'styled-components/native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -7,6 +7,7 @@ import { Image, Input, Button } from '../components';
 import { validateEmail, removeWhitespace } from '../utils/common';
 import { images } from '../utils/images';
 import { login } from '../utils/firebase';
+import { ProgressContext } from '../contexts';
 
 const Container = styled.View`
     flex: 1;
@@ -28,6 +29,7 @@ const ErrorText = styled.Text`
 `;
 
 const Login = ({ navigation }) => {
+    const { spinner } = useContext(ProgressContext);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
@@ -51,10 +53,13 @@ const Login = ({ navigation }) => {
     };
     const _handleLoginButtonPress = async () => {
         try {
+            spinner.start();
             const user = await login({ email, password });
             Alert.alert('Login Success', user.email);
         } catch (e) {
             Alert.alert('Login Error', e.message);
+        } finally {
+            spinner.stop();
         }
     };
 
