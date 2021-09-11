@@ -8,7 +8,7 @@ const colors = {
     green_0: '#9CC27E',
     green_1: '#8caf71'
 };
-  
+
 export const theme = {
     background: colors.white,
     text: colors.black,
