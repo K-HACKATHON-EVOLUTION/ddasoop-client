@@ -5,13 +5,15 @@ import { theme } from "../theme";
 import { ThemeProvider } from "styled-components";
 import { MyGroup, SearchBar, Group } from "../components";
 
+import axios from "axios";
+// import https from "https";
+
 const Container = styled.View`
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
   padding: 20px;
 `;
-
 const StyledText = styled.Text`
   font-weight: 500;
   font-size: 20px;
@@ -46,7 +48,7 @@ const groups = [
 
 const GroupList = ({ navigation }) => {
   const [search, setSearch] = useState("");
-
+  
   const _onPress = (group) => {
     navigation.navigate("Group", {
       name: group.forestName,

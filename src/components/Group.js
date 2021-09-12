@@ -10,7 +10,6 @@ const Container = styled.View`
   justify-content: space-between;
   margin-bottom: 20px;
 `;
-
 const ColumnWrapper = styled.View`
   flex-direction: column;
   justify-content: center;
@@ -19,14 +18,12 @@ const ColumnWrapper = styled.View`
 const RowWrapper = styled.View`
   flex-direction: row;
 `;
-
 const StyledImage = styled.Image`
   background-color: ${({ theme }) => theme.headerTintColor};
   width: 60px;
   height: 60px;
   border-radius: 100px;
 `;
-
 const TitleText = styled.Text`
   font-size: 17px;
   margin-bottom: 5px;
