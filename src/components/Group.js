@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import { TouchableOpacity } from "react-native";
-import { theme } from "../theme";
 
 const Container = styled.View`
   flex-direction: row;
@@ -21,7 +20,7 @@ const RowWrapper = styled.View`
 `;
 const StyledImage = styled.Image`
   background-color: ${({ theme }) => theme.headerTintColor};
-  width: 60;
+  width: 60px;
   height: 60px;
   border-radius: 100px;
 `;
@@ -35,10 +34,10 @@ const SubText = styled.Text`
 `;
 const SideText = styled.Text`
   font-size: 17px;
-  color: #8caf71;
+  color: ${({ theme }) => theme.headerTintColor};
 `;
 
-const Group = ({ _id, name, size, onPress, navigation }) => {
+const Group = ({ name, size, onPress }) => {
   return (
     <TouchableOpacity onPress={() => onPress()}>
       <Container>
@@ -54,6 +53,12 @@ const Group = ({ _id, name, size, onPress, navigation }) => {
       </Container>
     </TouchableOpacity>
   );
+};
+
+Group.propTypes = {
+  name: PropTypes.string.isRequired,
+  size: PropTypes.number.isRequired,
+  onPress: PropTypes.func.isRequired,
 };
 
 export default Group;

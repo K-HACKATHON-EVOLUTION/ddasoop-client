@@ -4,6 +4,7 @@ import { ScrollView } from "react-native";
 import { theme } from "../theme";
 import { ThemeProvider } from "styled-components";
 import { MyGroup, SearchBar, Group } from "../components";
+
 import axios from "axios";
 // import https from "https";
 
@@ -21,7 +22,7 @@ const StyledText = styled.Text`
 const groups = [
   {
     forestIdx: 1,
-    forestName: "EVOLUTION",
+    forestName: "test",
     leader: 1,
     size: 3,
     forestImg: null,
@@ -29,17 +30,17 @@ const groups = [
   },
   {
     forestIdx: 2,
-    forestName: "d",
+    forestName: "test2",
     leader: 1,
-    size: 5,
+    size: 3,
     forestImg: null,
     deleteFlag: false,
   },
   {
     forestIdx: 3,
-    forestName: "f",
+    forestName: "test3",
     leader: 1,
-    size: 10,
+    size: 3,
     forestImg: null,
     deleteFlag: false,
   },
@@ -47,21 +48,9 @@ const groups = [
 
 const GroupList = ({ navigation }) => {
   const [search, setSearch] = useState("");
-  // const [groups, setGroups] = useState([]);
-
-  // getGroups = async () => {
-  //   try{
-  //     const {data: groups} = await axios.get("", {httpsAgent: agent});
-  //     setGroups(groups);
-  //   }
-  //   catch(e){
-  //     console.log("getGroups error");
-  //   }
-  // }
-
+  
   const _onPress = (group) => {
     navigation.navigate("Group", {
-      id: group.forestIdx,
       name: group.forestName,
     });
   };

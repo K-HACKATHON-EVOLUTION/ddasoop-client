@@ -7,5 +7,7 @@ import Alert from "./Alert";
 import Setting from "./Setting";
 import CourseMain from "./CourseMain";
 import Tree from "./Tree";
+import Log from "./Log";
 
-export { Login, Signup, Home, GroupList, Group, Alert, Setting, CourseMain, Tree };
+
+export { Login, Signup, Home, GroupList, Group, Alert, Setting, CourseMain, Tree, Log };

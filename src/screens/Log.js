@@ -12,13 +12,12 @@ const StyledText = styled.Text`
   margin-bottom: 10px;
 `;
 
-const Group = ({ route }) => {
+const Log = ({ route }) => {
   return (
     <Container>
-      <StyledText>Group</StyledText>
-      <StyledText>Name: {route.params.name}</StyledText>
+      <StyledText>{route.params.carbon}</StyledText>
     </Container>
   );
 };
 
-export default Group;
+export default Log;
