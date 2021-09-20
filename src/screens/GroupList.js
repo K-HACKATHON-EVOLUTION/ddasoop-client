@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
-import styled from 'styled-components/native';
-import { Button, ScrollView } from 'react-native';
-import { theme } from '../theme';
-import { ThemeProvider } from 'styled-components';
-import { MyGroup, SearchBar, Group } from '../components';
+import React, { useState } from "react";
+import styled from "styled-components/native";
+import { ScrollView } from "react-native";
+import { theme } from "../theme";
+import { ThemeProvider } from "styled-components";
+import { MyGroup, SearchBar, Group } from "../components";
+import axios from "axios";
+// import https from "https";
 
 const Container = styled.View`
   flex-direction: column;
@@ -11,57 +13,72 @@ const Container = styled.View`
   align-items: stretch;
   padding: 20px;
 `;
-
 const StyledText = styled.Text`
   font-weight: 500;
   font-size: 20px;
 `;
 
 const groups = [
-    { _id: 1, name: 'EVOLUTION' },
-    { _id: 2, name: '서대문구 숲' },
-    { _id: 3, name: '강남구 숲' },
+  {
+    forestIdx: 1,
+    forestName: "test",
+    leader: 1,
+    size: 3,
+    forestImg: null,
+    deleteFlag: false,
+  },
+  {
+    forestIdx: 2,
+    forestName: "test2",
+    leader: 1,
+    size: 3,
+    forestImg: null,
+    deleteFlag: false,
+  },
+  {
+    forestIdx: 3,
+    forestName: "test3",
+    leader: 1,
+    size: 3,
+    forestImg: null,
+    deleteFlag: false,
+  },
 ];
 
 const GroupList = ({ navigation }) => {
-    const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
+  
+  const _onPress = (group) => {
+    navigation.navigate("Group", {
+      name: group.forestName,
+    });
+  };
 
-    const _onPress = group => {
-        navigation.navigate('Group', { id: group._id, name: group.name });
-    };
-
-    return (
-      <ScrollView>
+  return (
+    <ScrollView>
       <ThemeProvider theme={theme}>
         <Container>
-            <StyledText>MY 숲</StyledText>
-            <MyGroup>
-            </MyGroup>
-            <StyledText>숲 둘러보기</StyledText>
-            <SearchBar
-                value={search}
-                onChangeText={text => setSearch(text)}
-                placeholder="검색"
-                returnKeyType="done"
+          <StyledText>MY 숲</StyledText>
+          <MyGroup />
+          <StyledText>숲 둘러보기</StyledText>
+          <SearchBar
+            value={search}
+            onChangeText={(text) => setSearch(text)}
+            placeholder="검색"
+            returnKeyType="done"
+          />
+          {groups.map((group) => (
+            <Group
+              key={group.forestIdx}
+              name={group.forestName}
+              size={group.size}
+              onPress={() => _onPress(group)}
             />
-            <Group/>
-            <Group/>
-            <Group/>
-            <Group/>
-            <Group/>
-            <Group/>
-
-            {/* {groups.map(group => (
-                <Button
-                  key={group.id}
-                  title={group.name}
-                  onPress={() => _onPress(group)}
-                />
-            ))} */}
+          ))}
         </Container>
       </ThemeProvider>
-      </ScrollView>
-    );
+    </ScrollView>
+  );
 };
 
 export default GroupList;

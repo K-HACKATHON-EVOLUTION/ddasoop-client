@@ -1,8 +1,7 @@
-import React from 'react';
-import styled from 'styled-components/native';
-import PropTypes from 'prop-types';
-import { Text, TouchableOpacity } from 'react-native';
-import { theme } from '../theme';
+import React from "react";
+import styled from "styled-components/native";
+import PropTypes from "prop-types";
+import { TouchableOpacity } from "react-native";
 
 const Container = styled.View`
   flex-direction: row;
@@ -11,7 +10,6 @@ const Container = styled.View`
   justify-content: space-between;
   margin-bottom: 20px;
 `;
-
 const ColumnWrapper = styled.View`
   flex-direction: column;
   justify-content: center;
@@ -20,14 +18,12 @@ const ColumnWrapper = styled.View`
 const RowWrapper = styled.View`
   flex-direction: row;
 `;
-
 const StyledImage = styled.Image`
   background-color: ${({ theme }) => theme.headerTintColor};
-  width: 60;
+  width: 60px;
   height: 60px;
   border-radius: 100px;
 `;
-
 const TitleText = styled.Text`
   font-size: 17px;
   margin-bottom: 5px;
@@ -38,26 +34,31 @@ const SubText = styled.Text`
 `;
 const SideText = styled.Text`
   font-size: 17px;
-  color: #8caf71;
+  color: ${({ theme }) => theme.headerTintColor};
 `;
 
-const Group = ({ navigation }) => {
+const Group = ({ name, size, onPress }) => {
   return (
-    <TouchableOpacity onPress={() => console.log('꾹꾹')}>
-        <Container>
-            <RowWrapper>
-                {/* <StyledImage source={require('../../assets/maintree.png')}></StyledImage> */}
-                <StyledImage></StyledImage>
-
-                    <ColumnWrapper>
-                        <TitleText>서대문구 숲</TitleText>
-                        <SubText>멤버 수 10명</SubText>
-                    </ColumnWrapper>
-            </RowWrapper>
-            <SideText>1028kg</SideText>
-        </Container>
+    <TouchableOpacity onPress={() => onPress()}>
+      <Container>
+        <RowWrapper>
+          {/* <StyledImage source={require('../../assets/maintree.png')}></StyledImage> */}
+          <StyledImage></StyledImage>
+          <ColumnWrapper>
+            <TitleText>{name}</TitleText>
+            <SubText>멤버 수 {size}명</SubText>
+          </ColumnWrapper>
+        </RowWrapper>
+        <SideText>1028kg</SideText>
+      </Container>
     </TouchableOpacity>
   );
+};
+
+Group.propTypes = {
+  name: PropTypes.string.isRequired,
+  size: PropTypes.number.isRequired,
+  onPress: PropTypes.func.isRequired,
 };
 
 export default Group;

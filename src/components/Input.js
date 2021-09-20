@@ -1,6 +1,6 @@
-import React, { useState, forwardRef } from 'react';
-import styled from 'styled-components/native';
-import PropTypes from 'prop-types';
+import React, { useState, forwardRef } from "react";
+import styled from "styled-components/native";
+import PropTypes from "prop-types";
 
 const Container = styled.View`
   flex-direction: column;
@@ -24,11 +24,12 @@ const StyledTextInput = styled.TextInput.attrs(({ theme }) => ({
   font-size: 16px;
   border: 1px solid
     ${({ theme, isFocused }) => (isFocused ? theme.text : theme.inputBorder)};
-  border-radius: 4px;
+  border-radius: 7px;
 `;
 
 const Input = forwardRef(
-    ({
+  (
+    {
       label,
       value,
       onChangeText,
@@ -38,35 +39,37 @@ const Input = forwardRef(
       isPassword,
       returnKeyType,
       maxLength,
-    }, ref ) => {
-        const [isFocused, setIsFocused] = useState(false);
-
-        return (
-            <Container>
-                <Label isFocused={isFocused}>{label}</Label>
-                <StyledTextInput
-                    ref={ref}
-                    isFocused={isFocused}
-                    value={value}
-                    onChangeText={onChangeText}
-                    onSubmitEditing={onSubmitEditing}
-                    onFocus={() => setIsFocused(true)}
-                    onBlur={() => {
-                        setIsFocused(false);
-                        onBlur();
-                    }}
-                    placeholder={placeholder}
-                    secureTextEntry={isPassword}
-                    returnKeyType={returnKeyType}
-                    maxLength={maxLength}
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    textContentType="none" // iOS only
-                    underlineColorAndroid="transparent" // Android only
-                />
-            </Container>
-        );
-    }
+    },
+    ref
+  ) => {
+    const [isFocused, setIsFocused] = useState(false);
+    
+    return (
+      <Container>
+        <Label isFocused={isFocused}>{label}</Label>
+        <StyledTextInput
+          ref={ref}
+          isFocused={isFocused}
+          value={value}
+          onChangeText={onChangeText}
+          onSubmitEditing={onSubmitEditing}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => {
+            setIsFocused(false);
+            onBlur();
+          }}
+          placeholder={placeholder}
+          secureTextEntry={isPassword}
+          returnKeyType={returnKeyType}
+          maxLength={maxLength}
+          autoCapitalize="none"
+          autoCorrect={false}
+          textContentType="none" // iOS only
+          underlineColorAndroid="transparent" // Android only
+        />
+      </Container>
+    );
+  }
 );
 
 Input.defaultProps = {
@@ -81,7 +84,7 @@ Input.propTypes = {
   onBlur: PropTypes.func,
   placeholder: PropTypes.string,
   isPassword: PropTypes.bool,
-  returnKeyType: PropTypes.oneOf(['done', 'next']),
+  returnKeyType: PropTypes.oneOf(["done", "next"]),
   maxLength: PropTypes.number,
 };
 
