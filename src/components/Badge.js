@@ -8,6 +8,7 @@ const Container = styled.View`
     margin-left: 10px;
 `;
 
+
 const StyledImage = styled.Image`
     background-color: ${({ theme }) => theme.imageBackground};
     width: 100px;
