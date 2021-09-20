@@ -16,7 +16,7 @@ const Spinner = () => {
     const theme = useContext(ThemeContext);
     return (
         <Container>
-        <ActivityIndicator size={'large'} color={theme.spinnerIndicator} />
+            <ActivityIndicator size={'large'} color={theme.spinnerIndicator} />
         </Container>
     );
 };

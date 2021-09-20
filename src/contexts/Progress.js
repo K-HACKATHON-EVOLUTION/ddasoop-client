@@ -14,7 +14,7 @@ const ProgressProvider = ({ children }) => {
     const value = { inProgress, spinner };
     return (
         <ProgressContext.Provider value={value}>
-        {children}
+            {children}
         </ProgressContext.Provider>
     );
 };

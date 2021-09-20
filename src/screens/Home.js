@@ -1,7 +1,9 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useContext, useLayoutEffect } from 'react';
 import styled from 'styled-components/native';
 import { View, Button, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { AntDesign, Feather } from '@expo/vector-icons'; 
+import { UserContext } from "../contexts";
+import axios from 'axios';
 
 const Container = styled.View`
   flex: 1;
@@ -21,6 +23,8 @@ const SubText = styled.Text`
 `;
 
 const Home = ({ navigation }) => {
+  const { user } = useContext(UserContext);
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerBackTitleVisible: false,

@@ -4,7 +4,6 @@ import { ScrollView } from "react-native";
 import { theme } from "../theme";
 import { ThemeProvider } from "styled-components";
 import { MyGroup, SearchBar, Group } from "../components";
-
 import axios from "axios";
 // import https from "https";
 
@@ -60,7 +59,7 @@ const GroupList = ({ navigation }) => {
       <ThemeProvider theme={theme}>
         <Container>
           <StyledText>MY 숲</StyledText>
-          <MyGroup></MyGroup>
+          <MyGroup />
           <StyledText>숲 둘러보기</StyledText>
           <SearchBar
             value={search}

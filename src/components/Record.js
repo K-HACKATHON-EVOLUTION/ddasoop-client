@@ -34,8 +34,8 @@ const Record = ({ date, day, hours, minutes, carbon, onPress }) => {
         <Container>
             <View style={{display: 'flex', flexDirection: 'row'}}>
                 <View style={{ alignItems: 'center'}}>
-                    <Date>FRI</Date>
-                    <Date>9/23</Date>
+                    <Date>{day}</Date>
+                    <Date>{date}</Date>
                 </View>
                 <View style={{marginLeft: '15%'}}>
                     <Log>{hours}시 {minutes}분</Log>

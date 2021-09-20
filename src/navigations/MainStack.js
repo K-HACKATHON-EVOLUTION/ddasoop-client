@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Home, Tree, GroupList, Group, Alert, Setting, Log, CourseMain } from "../screens";
 import { AntDesign } from "@expo/vector-icons";
 import { Platform } from "react-native";
-
-const Stack = createStackNavigator();
+import { UserContext } from "../contexts";
 
 const MainStack = () => {
+  const { user } = useContext(UserContext);
+  const Stack = createStackNavigator();
+
+  // console.log(user?.uid);
   return (
     <Stack.Navigator
       initialRouteName="Home"

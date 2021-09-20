@@ -1,16 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
-import { MaterialIcons } from "@expo/vector-icons";
-import { Platform, Alert } from "react-native";
-import * as ImagePicker from "expo-image-picker";
-import * as Permissions from "expo-permissions";
 
 const Container = styled.View`
     align-self: center;
     margin-right: 10px;
     margin-left: 10px;
-
 `;
 
 const StyledImage = styled.Image`
