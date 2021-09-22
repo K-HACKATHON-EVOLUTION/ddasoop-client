@@ -4,8 +4,7 @@ import PropTypes from "prop-types";
 
 const Container = styled.View`
     align-self: center;
-    margin-right: 10px;
-    margin-left: 10px;
+    margin: 10px;
 `;
 
 

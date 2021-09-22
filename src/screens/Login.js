@@ -8,6 +8,7 @@ import { validateEmail, removeWhitespace } from '../utils/common';
 import { images } from '../utils/images';
 import { login } from '../utils/firebase';
 import { ProgressContext, UserContext } from '../contexts';
+import axios from "axios";
 
 const Container = styled.View`
     flex: 1;
@@ -42,6 +43,16 @@ const Login = ({ navigation }) => {
         setDisabled(!(email && password && !errorMessage));
     }, [email, password, errorMessage]);
 
+    const getUser = async (uid) => {
+        try{
+            const {data: user} = await axios.get(`http://13.125.127.125:8080/api/users/${uid}/main`);
+            return user.totalCarbon;
+        }
+        catch(e){
+            console.log("getUser error");
+        }
+    }
+
     const _handleEmailChange = email => {
         const changedEmail = removeWhitespace(email);
         setEmail(changedEmail);
@@ -56,6 +67,7 @@ const Login = ({ navigation }) => {
         try {
             spinner.start();
             const user = await login({ email, password });
+            user.totalCarbon = await getUser(user.uid);
             dispatch(user);
         } catch (e) {
             Alert.alert('Login Error', e.message);

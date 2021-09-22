@@ -7,7 +7,6 @@ const Auth = firebase.auth();
 
 export const login = async ({ email, password }) => {
     const { user } = await Auth.signInWithEmailAndPassword(email, password);
-    
     return user;
 };
 

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components/native";
-import { ScrollView, Image, View } from "react-native";
+import { ScrollView,TouchableOpacity, Image, View } from "react-native";
 import { theme } from "../theme";
 import { ThemeProvider } from "styled-components";
 import { Badge, Record } from "../components";
+import { UserContext } from "../contexts";
 
 const Container = styled.View`
   flex-direction: column;
@@ -44,17 +45,24 @@ const logs = [
 
 
 const Tree = ({ navigation }) => {
+  const { user } = useContext(UserContext);
+
   const _onPress = (log) => {
     navigation.navigate("Log", {
+      date: log.logDate,
+      day: log.dayOfWeek,
+      hours: log.hours,
+      minutes: log.minutes,
       carbon: log.carbon,
     });
   };
+
   return (
     <ScrollView>
       <ThemeProvider theme={theme}>
         <Container>
           <Wrapper>
-            <StyledText>ㅇㅇ 님의 나무</StyledText>
+            <StyledText>{user?.displayName}님의 나무</StyledText>
             <View style={{alignItems: 'center'}} >
               <Image
                 source={require('../../assets/maintree.png')}
@@ -66,14 +74,16 @@ const Tree = ({ navigation }) => {
               />
             </View>
           </Wrapper>
-          <Wrapper>
-            <StyledText>획득한 뱃지</StyledText>
-            <View style={{ display: 'flex', flexDirection: 'row'}}>
-              <Badge/>
-              <Badge/>
-              <Badge/>
-            </View>
-          </Wrapper>
+          <TouchableOpacity onPress={() => navigation.navigate('BadgeList')}>
+            <Wrapper>
+              <StyledText>획득한 뱃지</StyledText>
+              <View style={{ display: 'flex', flexDirection: 'row'}}>
+                <Badge/>
+                <Badge/>
+                <Badge/>
+              </View>
+            </Wrapper>
+          </TouchableOpacity>
           <Wrapper>
             <StyledText>기록</StyledText>
             {logs.map((log) => (

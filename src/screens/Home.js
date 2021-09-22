@@ -56,7 +56,7 @@ const Home = ({ navigation }) => {
               <TouchableOpacity onPress={() => navigation.navigate('Tree')}>
                 <Image source={require('../../assets/maintree.png')} style={{ marginTop: 180, marginBottom: 80 }}/>
               </TouchableOpacity>
-              <TitleText>9.87kg</TitleText>
+              <TitleText>{user?.totalCarbon}kg</TitleText>
               <SubText>총 탄소저감량</SubText>
               <Feather name="chevrons-down" color='#848484' size={25} style={{marginBottom: 10}} />
               <Feather name="chevrons-down" color='#848484' size={25} style={{marginBottom: 10}} />
