@@ -38,7 +38,7 @@ const Record = ({ date, day, hours, minutes, carbon, onPress }) => {
                     <Date>{date}</Date>
                 </View>
                 <View style={{marginLeft: '15%'}}>
-                    <Log>{hours}시 {minutes}분</Log>
+                    <Log>{hours}시간 {minutes}분</Log>
                     <Log>{carbon}kg</Log>
                 </View>
             </View>
