@@ -71,7 +71,6 @@ const Signup = () => {
         try {
             spinner.start();
             const user = await signup({ email, password, name, photoUrl });
-            console.log(user);
             dispatch(user);
         } catch (e) {
             Alert.alert('Signup Error', e.message);

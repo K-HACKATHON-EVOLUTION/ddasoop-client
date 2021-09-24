@@ -45,7 +45,7 @@ const Login = ({ navigation }) => {
 
     const getUser = async (uid) => {
         try{
-            const {data: user} = await axios.get(`http://13.125.127.125:8080/api/users/${uid}/main`);
+            const {data: user} = await axios.get(`http://13.125.127.125:8080/api/users/${uid}`);
             return user.totalCarbon;
         }
         catch(e){
