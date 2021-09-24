@@ -15,14 +15,12 @@ const Container = styled.View`
   border-radius: 10px;
 `;
 
-const MyGroup = ({ navigation }) => {
-  const { user } = useContext(UserContext);
-  console.log(user);
+const MyGroup = ({ name, img }) => {
   return (
-    <TouchableOpacity onPress={() => console.log('alksd')}>
-      {user?.group ?
+    <TouchableOpacity>
+      {name ?
         <Container>
-          <Text style={{ fontSize: 17 }}>숲 있는 경우 - 내비게이션 추가 필요</Text>
+          <Text style={{ fontSize: 17 }}>{name}</Text>
         </Container> :
         <Container>
           <Text style={{ fontSize: 17 }}>숲 만들기</Text>
