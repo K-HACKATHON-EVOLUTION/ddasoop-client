@@ -4,7 +4,7 @@ import { ScrollView } from "react-native";
 import { theme } from "../theme";
 import { ThemeProvider } from "styled-components";
 import { MyGroup, SearchBar, Group } from "../components";
-import { UserContext } from '../contexts';
+import { UserContext } from "../contexts";
 import axios from "axios";
 
 const Container = styled.View`
@@ -25,26 +25,27 @@ const GroupList = ({ navigation }) => {
   const [mygroup, setMygroup] = useState({});
 
   const getGroups = async () => {
-    try{
-        const {data} = await axios.get(`http://13.125.127.125:8080/api/forests`);
-        setGroup(data);
-        return;
+    try {
+      const { data } = await axios.get(
+        `http://13.125.127.125:8080/api/forests`
+      );
+      setGroup(data);
+    } catch (e) {
+      console.log("getGroup error");
     }
-    catch(e){
-        console.log("getGroup error");
-    }
-  }
+  };
 
   const getMygroup = async (uid) => {
-    try{
-        const {data} = await axios.get(`http://13.125.127.125:8080/api/users/${uid}/forest`);
-        setMygroup(data);
-        return;
+    try {
+      const { data } = await axios.get(
+        `http://13.125.127.125:8080/api/users/${uid}/forest`
+      );
+      setMygroup(data);
+      return;
+    } catch (e) {
+      if (e.response && e.response.status != 500) console.log('getMyGroup Error');
     }
-    catch(e){
-        console.log("getMygroup error");
-    }
-  }
+  };
 
   useEffect(() => {
     getMygroup(user?.uid);
@@ -57,7 +58,7 @@ const GroupList = ({ navigation }) => {
       leader: group.leader,
       name: group.forestName,
       size: group.size,
-      img: group.forestImg
+      img: group.forestImg,
     });
   };
 
@@ -66,7 +67,7 @@ const GroupList = ({ navigation }) => {
       <ThemeProvider theme={theme}>
         <Container>
           <StyledText>MY 숲</StyledText>
-          <MyGroup name={mygroup.forestName} img={mygroup.forestImg}/>
+          <MyGroup name={mygroup.forestName} img={mygroup.forestImg} />
           <StyledText>숲 둘러보기</StyledText>
           <SearchBar
             value={search}

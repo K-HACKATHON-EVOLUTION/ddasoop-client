@@ -4,18 +4,17 @@ const UserContext = createContext({
     user: {
         email: null,
         uid: null,
-        displayName: null,
+        userName: null,
+        treeImg: null,
         totalCarbon: null,
-        group: null,
-
     },
     dispatch: () => {},
 });
 
 const UserProvider = ({ children }) => {
     const [user, setUser] = useState({});
-    const dispatch = ({ email, uid, totalCarbon, displayName }) => {
-        setUser({ email, uid, totalCarbon, displayName, group: null });
+    const dispatch = ({ email, uid, userName, treeImg, totalCarbon }) => {
+        setUser({ email, uid, userName, treeImg, totalCarbon });
     };
     const value = { user, dispatch };
     return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

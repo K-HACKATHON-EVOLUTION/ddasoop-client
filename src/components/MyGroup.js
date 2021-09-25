@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
-import styled from 'styled-components/native';
-import PropTypes from 'prop-types';
-import { Text, TouchableOpacity } from 'react-native';
-import { UserContext } from '../contexts/User';
+import React, { useContext } from "react";
+import styled from "styled-components/native";
+import PropTypes from "prop-types";
+import { Text, TouchableOpacity, View } from "react-native";
+import { UserContext } from "../contexts/User";
 
 const Container = styled.View`
   height: 120px;
@@ -17,16 +17,21 @@ const Container = styled.View`
 
 const MyGroup = ({ name, img }) => {
   return (
-    <TouchableOpacity>
-      {name ?
-        <Container>
-          <Text style={{ fontSize: 17 }}>{name}</Text>
-        </Container> :
-        <Container>
-          <Text style={{ fontSize: 17 }}>숲 만들기</Text>
-        </Container>
-      }
-    </TouchableOpacity>
+    <View>
+      {name ? (
+        <TouchableOpacity>
+          <Container>
+            <Text style={{ fontSize: 17 }}>{name}</Text>
+          </Container>
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity>
+          <Container>
+            <Text style={{ fontSize: 17 }}>숲 만들기</Text>
+          </Container>
+        </TouchableOpacity>
+      )}
+    </View>
   );
 };
 

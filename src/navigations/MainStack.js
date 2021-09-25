@@ -9,7 +9,6 @@ const MainStack = () => {
   const { user } = useContext(UserContext);
   const Stack = createStackNavigator();
 
-  // console.log(user?.uid);
   return (
     <Stack.Navigator
       initialRouteName="Home"

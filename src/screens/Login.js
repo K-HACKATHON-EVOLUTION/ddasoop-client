@@ -46,7 +46,7 @@ const Login = ({ navigation }) => {
     const getUser = async (uid) => {
         try{
             const {data: user} = await axios.get(`http://13.125.127.125:8080/api/users/${uid}`);
-            return user.totalCarbon;
+            return user;
         }
         catch(e){
             console.log("getUser error");
@@ -67,7 +67,10 @@ const Login = ({ navigation }) => {
         try {
             spinner.start();
             const user = await login({ email, password });
-            user.totalCarbon = await getUser(user.uid);
+            const gotuser = await getUser(user.uid);
+            user.userName = gotuser.userName;
+            user.treeImg = gotuser.treeImg;
+            user.totalCarbon = gotuser.totalCarbon;
             dispatch(user);
         } catch (e) {
             Alert.alert('Login Error', e.message);

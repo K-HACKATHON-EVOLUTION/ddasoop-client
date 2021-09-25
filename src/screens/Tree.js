@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import styled from "styled-components/native";
-import { ScrollView, TouchableOpacity, Image, View } from "react-native";
+import { ScrollView, TouchableOpacity, Image, View, Text } from "react-native";
 import { theme } from "../theme";
 import { ThemeProvider } from "styled-components";
 import { Badge, Record } from "../components";
@@ -12,6 +12,20 @@ const Container = styled.View`
   justify-content: flex-start;
   align-items: stretch;
   padding: 30px;
+`;
+
+const NoRecord = styled.View`
+  height: 70px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #e0e0e0;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  padding-left: 25px;
+  padding-right: 25px;
 `;
 
 const Wrapper = styled.View`
@@ -56,7 +70,7 @@ const Tree = ({ navigation }) => {
         else if (log.dayOfWeek === 5) log.dayOfWeek = "FRI";
         else if (log.dayOfWeek === 6) log.dayOfWeek = "SAT";
         else log.dayOfWeek = "SUN";
-        
+
         date = log.logDate.slice(2, 4) + "/";
         date += log.logDate.slice(5, 7) + "/";
         date += log.logDate.slice(8, 10);
@@ -81,10 +95,9 @@ const Tree = ({ navigation }) => {
       <ThemeProvider theme={theme}>
         <Container>
           <Wrapper>
-            <StyledText>{user?.displayName}님의 나무</StyledText>
             <View style={{ alignItems: "center" }}>
               <Image
-                source={require("../../assets/maintree.png")}
+                source={{ uri: user?.treeImg }}
                 style={{
                   resizeMode: "contain",
                   width: 120,
@@ -105,17 +118,23 @@ const Tree = ({ navigation }) => {
           </Wrapper>
           <Wrapper>
             <StyledText>기록</StyledText>
-            {logs.map((log) => (
-              <Record
-                key={log.logIdx}
-                date={log.logDate}
-                day={log.dayOfWeek}
-                hours={log.hours}
-                minutes={log.minutes}
-                carbon={log.carbon}
-                onPress={() => _onPress(log)}
-              />
-            ))}
+            {logs.length!=0 ? (
+              logs.map((log) => (
+                <Record
+                  key={log.logIdx}
+                  date={log.logDate}
+                  day={log.dayOfWeek}
+                  hours={log.hours}
+                  minutes={log.minutes}
+                  carbon={log.carbon}
+                  onPress={() => _onPress(log)}
+                />
+              ))
+            ) : (
+              <NoRecord>
+                <Text>기록 시작 버튼 연결되게 해야 함</Text>
+              </NoRecord>
+            )}
           </Wrapper>
         </Container>
       </ThemeProvider>
