@@ -1,22 +1,25 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import { SettingBar } from "../components";
+import { ScrollView, TouchableOpacity, Image, View, Text } from "react-native";
 
-const Container = styled.View`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-`;
-
-const StyledText = styled.Text`
-  font-size: 30px;
-  margin-bottom: 10px;
-`;
+const _onPress = (setting) => {
+  navigation.navigate("?", {
+    date: log.logDate,
+    day: log.dayOfWeek,
+    hours: log.hours,
+    minutes: log.minutes,
+    carbon: log.carbon,
+  });
+};
 
 const Setting = () => {
   return (
-    <Container>
-      <StyledText>Setting</StyledText>
-    </Container>
+    <View>
+      <SettingBar setting={"이름 변경"} />
+      <SettingBar setting={"로그아웃"} />
+      <SettingBar setting={"탈퇴"} />
+    </View>
   );
 };
 
