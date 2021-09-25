@@ -7,5 +7,6 @@ import Button from "./Button";
 import Spinner from "./Spinner"; 
 import Record from "./Record";
 import Badge from "./Badge";
+import SettingBar from "./SettingBar";
 
-export { Image, Input, MyGroup, SearchBar, Group, Button, Spinner, Record, Badge };
+export { Image, Input, MyGroup, SearchBar, Group, Button, Spinner, Record, Badge, SettingBar };
