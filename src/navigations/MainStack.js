@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
+import { Home, Tree, GroupList, Group, Alert, Setting, Log, CourseMain, LogList } from "../screens";
 import { AntDesign } from "@expo/vector-icons";
 import { Platform } from "react-native";
 import { UserContext } from "../contexts";
@@ -64,6 +65,9 @@ const MainStack = () => {
         options={{ headerTitle: "나의 나무" }}
       />
       <Stack.Screen
+        name="LogList"
+        component={LogList}
+        options={{ headerTitle: "나의 기록" }}
       />
       <Stack.Screen
         name="Log"
