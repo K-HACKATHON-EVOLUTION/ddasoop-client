@@ -3,8 +3,7 @@ import styled from "styled-components/native";
 import PropTypes from "prop-types";
 
 const Container = styled.View`
-    align-self: center;
-    margin: 10px;
+    margin: 7px;
 `;
 
 
@@ -15,10 +14,10 @@ const StyledImage = styled.Image`
     border-radius: 50px;
 `;
 
-const Badge = ({ navigation }) => {
+const Badge = ({ navigation, img }) => {
     return (
         <Container>
-            <StyledImage />
+            <StyledImage source={{ uri: `${img}`}}/>
         </Container>
     );
 };

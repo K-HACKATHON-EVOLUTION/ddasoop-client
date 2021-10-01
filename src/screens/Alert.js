@@ -8,14 +8,14 @@ const Container = styled.View`
 `;
 
 const StyledText = styled.Text`
-  font-size: 30px;
-  margin-bottom: 10px;
+  font-size: 20px;
+  color: gray;
 `;
 
 const Alert = () => {
   return (
     <Container>
-      <StyledText>Alert</StyledText>
+      <StyledText>알림이 없습니다!</StyledText>
     </Container>
   );
 };

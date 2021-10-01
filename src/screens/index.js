@@ -8,6 +8,6 @@ import Setting from "./Setting";
 import CourseMain from "./CourseMain";
 import Tree from "./Tree";
 import Log from "./Log";
-import BadgeList from "./BadgeList";
+import LogList from "./LogList";
 
-export { Login, Signup, Home, GroupList, Group, Alert, Setting, CourseMain, Tree, Log, BadgeList };
+export { Login, Signup, Home, GroupList, Group, Alert, Setting, CourseMain, Tree, Log, LogList };

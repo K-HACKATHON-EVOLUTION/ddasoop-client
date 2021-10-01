@@ -6,7 +6,7 @@ import { View, TouchableOpacity } from "react-native";
 
 const Container = styled.View`
     height: 70px;
-    width: 100%;
+    width: 370px;
     display: flex;
     flex-direction: row;
     align-items: center;
