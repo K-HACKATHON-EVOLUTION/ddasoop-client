@@ -15,11 +15,11 @@ const Container = styled.View`
   border-radius: 10px;
 `;
 
-const MyGroup = ({ name, img }) => {
+const MyGroup = ({ name, img, onPress }) => {
   return (
     <View>
       {name ? (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => onPress()}>
           <Container>
             <Text style={{ fontSize: 17 }}>{name}</Text>
           </Container>

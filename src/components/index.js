@@ -8,5 +8,8 @@ import Spinner from "./Spinner";
 import Record from "./Record";
 import Badge from "./Badge";
 import SettingBar from "./SettingBar";
+import Place from "./Place";
+import Textbox from "./Textbox";
 
-export { Image, Input, MyGroup, SearchBar, Group, Button, Spinner, Record, Badge, SettingBar };
+
+export { Image, Input, MyGroup, SearchBar, Group, Button, Spinner, Record, Badge, SettingBar, Place, Textbox };
