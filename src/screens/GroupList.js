@@ -41,7 +41,6 @@ const GroupList = ({ navigation }) => {
         `http://13.125.127.125:8080/api/users/${uid}/forest`
       );
       setMygroup(data);
-      return;
     } catch (e) {
       if (e.response && e.response.status != 500) console.log('getMyGroup Error');
     }
@@ -67,7 +66,11 @@ const GroupList = ({ navigation }) => {
       <ThemeProvider theme={theme}>
         <Container>
           <StyledText>MY 숲</StyledText>
-          <MyGroup name={mygroup.forestName} img={mygroup.forestImg} />
+          <MyGroup
+            name={mygroup.forestName}
+            img={mygroup.forestImg}
+            onPress={() => _onPress(mygroup)}
+          />
           <StyledText>숲 둘러보기</StyledText>
           <SearchBar
             value={search}

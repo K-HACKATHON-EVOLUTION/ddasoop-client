@@ -2,9 +2,7 @@ import React, { useContext, useLayoutEffect } from "react";
 import {
   StyleSheet,
   View,
-  Text,
   Image,
-  ScrollView,
   TouchableOpacity,
 } from "react-native";
 import { AntDesign, Feather } from "@expo/vector-icons";
@@ -76,17 +74,6 @@ const Home = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  // title: {
-  //   fontSize: 25,
-  //   marginBottom: 5,
-  //   fontWeight: "bold",
-  //   color: "#848484",
-  // },
-  // subtitle: {
-  //   fontSize: 15,
-  //   marginBottom: 100,
-  //   color: "gray",
-  // },
   container: {
     flex: 1,
     alignItems: "center",

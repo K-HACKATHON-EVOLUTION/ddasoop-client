@@ -29,13 +29,13 @@ const LogList = ({ navigation }) => {
     const { user } = useContext(UserContext);
     const [logs, setLogs] = useState([]);
     const [monthly, setMonthly] = useState({});
+
     const getLogs = async (uid) => {
         try {
         const { data } = await axios.get(
             `http://13.125.127.125:8080/api/users/${uid}/logs`
         );
-        const logs = reform(data);
-        setLogs(logs);
+        setLogs(reform(data));
         } catch (e) {
         console.log("getLogs error");
         }
@@ -54,7 +54,7 @@ const LogList = ({ navigation }) => {
     useEffect(() => {
         getLogs(user?.uid);
         getMonthly(user?.uid);
-    }, [logs], [monthly]);
+    }, []);
 
     const reform = (logs) => {
         let date = "";
@@ -79,11 +79,9 @@ const LogList = ({ navigation }) => {
 
     const _onPress = (log) => {
         navigation.navigate("Log", {
-        date: log.logDate,
-        day: log.dayOfWeek,
-        hours: log.hours,
-        minutes: log.minutes,
-        carbon: log.carbon,
+            index: log.logIdx,
+            date: log.logDate,
+            day: log.dayOfWeek,
         });
     };
 

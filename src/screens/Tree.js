@@ -14,12 +14,12 @@ const Tree = () => {
       );
       setBadges(data);
     } catch (e) {
-      console.log("getBadges Error");
+      console.log(e);
     }
   };
   useEffect(() => {
     getBadges(user?.uid);
-  }, [badges]);
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -32,8 +32,8 @@ const Tree = () => {
         {badges.length != 0 ? (
           badges.map((badge) => (
             <Badge
-              key={badge.badgeIdx}
-              img={badge.badgeImg}
+              key={badge.badgeImgIdx}
+              img={badge.filePath}
             />
           ))
         ) : (
