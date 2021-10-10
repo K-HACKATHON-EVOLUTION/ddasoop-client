@@ -3,10 +3,10 @@ import styled from "styled-components/native";
 import PropTypes from "prop-types";
 import { AntDesign } from "@expo/vector-icons";
 import { View, TouchableOpacity } from "react-native";
+import { Dimensions } from "react-native";
 
 const Container = styled.View`
     height: 70px;
-    width: 370px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -16,6 +16,7 @@ const Container = styled.View`
     border-radius: 10px;
     padding-left: 25px;
     padding-right: 25px;
+    width: ${Dimensions.get('window').width - 20};
 `;
 
 const Date = styled.Text`
