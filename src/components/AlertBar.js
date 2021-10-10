@@ -1,14 +1,16 @@
 import React from "react";
 import styled from "styled-components/native";
 import { AntDesign } from "@expo/vector-icons";
-import { TouchableOpacity } from "react-native";
 
 const Container = styled.View`
     height: 70px;
+    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    border-bottom-color: lightgray;
+    border-bottom-width: 0.2px;
     padding: 20px;
 `;
 const StyledText = styled.Text`
@@ -16,16 +18,12 @@ const StyledText = styled.Text`
     color: gray;
 `;
 
-const SettingBar = ({ setting, onPress }) => {
+const AlertBar = ({ alert }) => {
     return (
-        <TouchableOpacity style={{width:"100%"}} onPress={() => onPress()}>
         <Container>
-            <StyledText>{setting}</StyledText>
-            <AntDesign name="right" color="gray" size={25}/>
+            <StyledText>{alert}</StyledText>
         </Container>
-        </TouchableOpacity>
     );
-    
 };
 
-export default SettingBar;
+export default AlertBar;

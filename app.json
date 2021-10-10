@@ -17,12 +17,20 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false,
+      "bundleIdentifier": "com.evolution.ddasoop",
+      "buildNumber": "1.0.0"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
+      },
+      "package": "com.evolution.ddasoop",
+      "versionCode": 1,
+      "permissions": ["CAMERA"],
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-1309743501609664/7107726105"
       }
     },
     "web": {

@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Home, Tree, GroupList, Group, Alert, Setting, Log, CourseMain, LogList } from "../screens";
+import { Tree, Alert, Log, Start, CourseList, Course, Group, GroupSetting, CreateGroup, MemberSetting } from "../screens";
 import { AntDesign } from "@expo/vector-icons";
-import { Platform } from "react-native";
+import { Platform, View } from "react-native";
 import { UserContext } from "../contexts";
+import Drawer from "./Drawer";
 
 const MainStack = () => {
   const { user } = useContext(UserContext);
@@ -15,7 +16,7 @@ const MainStack = () => {
       screenOptions={{
         cardStyle: { backgroundColor: "#ffffff" },
         headerStyle: {
-          height: 110,
+          height: Platform.OS === "ios" ? 110 : 70,
           backgroundColor: "#ffffff",
         },
         headerTitleStyle: {
@@ -38,26 +39,9 @@ const MainStack = () => {
       }}
     >
       <Stack.Screen
-        name="Home"
-        component={Home}
-        options={{ headerTitle: "따숲" }}
-      />
-
-      <Stack.Screen
-        name="GroupList"
-        component={GroupList}
-        options={{ headerTitle: "숲" }}
-      />
-      <Stack.Screen
-        name="Group"
-        component={Group}
-        options={{ headerTitle: "숲 상세 보기" }}
-      />
-
-      <Stack.Screen
-        name="CourseMain"
-        component={CourseMain}
-        options={{ headerTitle: "코스" }}
+        name="Drawer"
+        component={Drawer}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="Tree"
@@ -65,9 +49,24 @@ const MainStack = () => {
         options={{ headerTitle: "나의 나무" }}
       />
       <Stack.Screen
-        name="LogList"
-        component={LogList}
-        options={{ headerTitle: "나의 기록" }}
+        name="Group"
+        component={Group}
+        options={{ headerTitle: "숲 상세 보기" }}
+      />
+      <Stack.Screen
+        name="CreateGroup"
+        component={CreateGroup}
+        options={{ headerTitle: "숲 만들기" }}
+      />
+      <Stack.Screen
+        name="GroupSetting"
+        component={GroupSetting}
+        options={{ headerTitle: "숲 설정" }}
+      />
+      <Stack.Screen
+        name="MemberSetting"
+        component={MemberSetting}
+        options={{ headerTitle: "그룹원 설정" }}
       />
       <Stack.Screen
         name="Log"
@@ -80,9 +79,19 @@ const MainStack = () => {
         options={{ headerTitle: "알림" }}
       />
       <Stack.Screen
-        name="Setting"
-        component={Setting}
-        options={{ headerTitle: "설정" }}
+        name="Start"
+        component={Start}
+        options={{ headerTitle: "기록하기" }}
+      />
+      <Stack.Screen
+        name="CourseList"
+        component={CourseList}
+        options={{ headerTitle: "코스" }}
+      />
+      <Stack.Screen
+        name="Course"
+        component={Course}
+        options={{ headerTitle: "코스 상세 보기" }}
       />
     </Stack.Navigator>
   );

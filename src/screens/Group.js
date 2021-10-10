@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
+import { AntDesign } from "@expo/vector-icons";
+
 import styled from "styled-components/native";
 import axios from "axios";
 import {VictoryChart, VictoryAxis, VictoryBar, VictoryLabel} from "victory-native";
@@ -13,7 +15,21 @@ const StyledText = styled.Text`
   color: #848484;
 `;
 
-const Group = ({ route }) => {
+const Group = ({ navigation, route }) => {
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerTintColor: "#848484",
+      headerRight: ({ tintColor }) => (
+        <AntDesign
+          name="setting"
+          size={25}
+          color={tintColor}
+          style={{ marginRight: 20 }}
+          onPress={()=>{navigation.navigate('GroupSetting')}}
+        />
+      ),
+    });
+  }, []);
   const [members, setMembers] = useState([]);
   const [chartData, setChartData] = useState([]);
   const getMembers = async (forestIdx) => {

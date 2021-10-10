@@ -1,7 +1,6 @@
 import React from 'react';
-import styled from 'styled-components/native';
 import { SettingBar } from "../components";
-import { ScrollView, TouchableOpacity, Image, View, Text } from "react-native";
+import { View } from "react-native";
 
 const _onPress = (setting) => {
   navigation.navigate("?", {
@@ -15,10 +14,12 @@ const _onPress = (setting) => {
 
 const Setting = () => {
   return (
-    <View>
-      <SettingBar setting={"이름 변경"} />
+    <View style={{height: "100%", backgroundColor: "white"}}>
+      <SettingBar setting={"알림 설정"} />
+      <SettingBar setting={"프로필 이름 설정"} />
+      <SettingBar setting={"비밀번호 수정"} />
       <SettingBar setting={"로그아웃"} />
-      <SettingBar setting={"탈퇴"} />
+      <SettingBar setting={"회원 탈퇴"} />
     </View>
   );
 };

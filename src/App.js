@@ -8,6 +8,7 @@ import { theme } from './theme';
 import Navigation from './navigations';
 import { images } from './utils/images';
 import { ProgressProvider, UserProvider } from './contexts';
+import { Platform } from "react-native";
 
 const cacheImages = images => {
   return images.map(image => {
@@ -40,7 +41,9 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <UserProvider>
         <ProgressProvider>
-          <StatusBar barStyle="dark-content" />
+          {Platform.OS === "ios" ?
+          <StatusBar barStyle="dark-content" /> :
+          <StatusBar barStyle="light-content" />}
           <Navigation />
         </ProgressProvider>
       </UserProvider>

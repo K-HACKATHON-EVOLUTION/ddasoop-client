@@ -3,6 +3,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { ThemeContext } from "styled-components/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Login, Signup } from "../screens";
+import { Platform } from "react-native";
 
 const Stack = createStackNavigator();
 
@@ -14,7 +15,7 @@ const AuthStack = () => {
       screenOptions={{
         cardStyle: { backgroundColor: theme.background },
         headerStyle: {
-          height: 110,
+          height: Platform.OS === "ios" ? 110 : 70,
           backgroundColor: theme.background,
         },
         headerTitleStyle: {

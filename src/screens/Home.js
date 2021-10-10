@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import { AntDesign, Feather } from "@expo/vector-icons";
 import { UserContext } from "../contexts";
+import { AdBanner, Shortcut, HomeTree } from "../components";
 
 const Home = ({ navigation }) => {
   const { user } = useContext(UserContext);
@@ -15,12 +16,12 @@ const Home = ({ navigation }) => {
       headerBackTitleVisible: false,
       headerTintColor: "#848484",
       headerLeft: ({ tintColor }) => (
-        <AntDesign
-          name="setting"
+        <Feather
+          name="menu"
           size={25}
           color={tintColor}
           style={{ marginLeft: 20 }}
-          onPress={() => navigation.navigate("Setting")}
+          onPress={() => navigation.toggleDrawer()}
         />
       ),
       headerRight: ({ tintColor }) => (
@@ -35,41 +36,14 @@ const Home = ({ navigation }) => {
     });
   }, []);
   return (
-    <View style={styles.container}>
       <View style={styles.container}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Tree")}
-          style={styles.touchable}
-        >
-          <Image source={{ uri: user?.treeImg }} style={styles.tree} />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("LogList")}>
-        <Image
-          source={require("../../assets/calendar.png")}
-          style={{ marginBottom: 20 }}
-        />
-        </TouchableOpacity>
-
+          <HomeTree navigation={navigation}/>
+          <View style={styles.wrapper}>
+            <Shortcut title="나의 숲 바로가기"/>
+            <Shortcut title="이번 주 1위 코스 바로가기"/>
+          </View> 
+          <AdBanner/>
       </View>
-      <View style={styles.bar}>
-        <AntDesign
-          name="setting"
-          size={30}
-          onPress={() => navigation.navigate("CourseMain")}
-        />
-        <AntDesign
-          name="setting"
-          size={30}
-          onPress={() => navigation.navigate("CourseMain")}
-        />        
-        <AntDesign
-          name="setting"
-          size={30}
-          onPress={() => navigation.navigate("GroupList")}
-        />
-
-      </View>
-    </View>
   );
 };
 
@@ -77,19 +51,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-end",
+    padding: 20,
+    backgroundColor: "white"
   },
-  bar: {
+  wrapper: {
+    display: "flex",
     flexDirection: "row",
-    width: "100%",
-    justifyContent: "space-around",
-    height: 85,
-    borderTopWidth: 1,
-    borderTopColor: "lightgray",
-    paddingTop: 20
+    marginTop: 110
   },
   touchable: {
     alignItems: "center",
+    backgroundColor: "black",
     justifyContent: "center",
     margin: 50,
     height: 200,
