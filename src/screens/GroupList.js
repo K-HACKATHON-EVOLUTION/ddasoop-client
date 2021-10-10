@@ -62,7 +62,7 @@ const GroupList = ({ navigation }) => {
   };
 
   return (
-    <ScrollView>
+    <ScrollView style={{backgroundColor: "white"}}>
       <ThemeProvider theme={theme}>
         <Container>
           <StyledText>MY 숲</StyledText>
