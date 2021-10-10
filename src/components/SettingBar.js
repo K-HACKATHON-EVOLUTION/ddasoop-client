@@ -1,17 +1,14 @@
 import React from "react";
 import styled from "styled-components/native";
-import PropTypes from "prop-types";
 import { AntDesign } from "@expo/vector-icons";
-import { Text, View, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 
 const Container = styled.View`
-    height: 80px;
+    height: 70px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    border-bottom-color: lightgray;
-    border-bottom-width: 0.2px;
     padding: 20px;
 `;
 const StyledText = styled.Text`
