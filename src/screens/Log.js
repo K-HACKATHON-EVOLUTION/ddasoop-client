@@ -3,8 +3,9 @@ import styled from "styled-components/native";
 import MapView, { Polyline } from "react-native-maps";
 import { Text, StyleSheet, Dimensions, View } from "react-native";
 import { UserContext } from "../contexts";
-import { Place, Textbox } from "../components";
+import { Place, Textbox, AdBanner } from "../components";
 import axios from "axios";
+const width = Dimensions.get("window").width;
 
 const Container = styled.View`
   flex: 1;
@@ -49,15 +50,15 @@ const Log = ({ route }) => {
 
   return (
     <Container>
-      <Text style={styles.title}>
-        {route.params.date} {route.params.day}
-      </Text>
+      <View style={{width}}>
+        <Text style={styles.title}>{route.params.date} {route.params.day}</Text>
+      </View>
       <MapContainer>
         <MapView
           style={styles.map}
           initialRegion={{
-            latitude: 37.78,
-            longitude: -122.4,
+            latitude: 38.5,
+            longitude: -120.2,
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
           }}
@@ -85,11 +86,11 @@ const Log = ({ route }) => {
         <Textbox title={log.distance + "km"} subtitle={"거리"} />
         <Textbox title={log.carbon + "kg"} subtitle={"탄소 저감"} />
       </View>
+      <AdBanner/>
     </Container>
   );
 };
 
-const width = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
   map: {
@@ -101,7 +102,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#848484",
     marginTop: 20,
-    marginRight: 250,
+    marginLeft: 20
   },
 });
 
