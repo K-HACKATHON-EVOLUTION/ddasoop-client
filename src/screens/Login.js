@@ -1,11 +1,10 @@
 import React, { useContext, useState, useRef, useEffect } from 'react';
-import { Alert } from 'react-native';
+import { Image, Alert } from 'react-native';
 import styled from 'styled-components/native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Image, Input, Button } from '../components';
+import { Input, Button } from '../components';
 import { validateEmail, removeWhitespace } from '../utils/common';
-import { images } from '../utils/images';
 import { login } from '../utils/firebase';
 import { ProgressContext, UserContext } from '../contexts';
 import axios from "axios";
@@ -85,7 +84,7 @@ const Login = ({ navigation }) => {
             extraScrollHeight={30}
         >
             <Container insets={insets}>
-                <Image url={images.logo} imageStyle={{ borderRadius: 8 }} />
+                <Image source={require("../../assets/icon.png")} style={{  width: 100, height: 100, marginBottom:50 }} />
                 <Input
                     label="Email"
                     value={email}
