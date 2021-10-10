@@ -1,56 +1,29 @@
 import React, { useContext, useState, useEffect } from "react";
-import { StyleSheet, Image, View, Text } from "react-native";
-import { Badge } from "../components";
+import { StyleSheet, Image, View, Text, ScrollView } from "react-native";
 import { UserContext } from "../contexts";
 import axios from "axios";
+import TreePolar from "../components/TreePolar";
 
 const Tree = () => {
   const { user } = useContext(UserContext);
-  const [badges, setBadges] = useState([]);
-  const getBadges = async (uid) => {
-    try {
-      const { data } = await axios.get(
-        `http://13.125.127.125:8080/api/users/${uid}/badges`
-      );
-      setBadges(data);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  useEffect(() => {
-    getBadges(user?.uid);
-  }, []);
 
   return (
-    <View style={styles.container}>
+    <ScrollView>
       <View style={styles.container}>
         <Image source={{ uri: user?.treeImg }} style={styles.tree} />
         <Text style={styles.subtitle}>나무 완성까지</Text>
         <Text style={styles.title}>{10 - (user?.totalCarbon % 10)}kg</Text>
+        <View style={styles.photos}>
+          <TreePolar name={"qkqh"}></TreePolar>
+          <TreePolar name={"qkqh"}></TreePolar>
+          <TreePolar name={"qkqh"}></TreePolar>
+          <TreePolar name={"qkqh"}></TreePolar>
+          <TreePolar name={"qkqh"}></TreePolar>
+          <TreePolar name={"qkqh"}></TreePolar>
+        </View>
       </View>
-      <View style={styles.badge}>
-        {badges.length != 0 ? (
-          badges.map((badge) => (
-            <Badge
-              key={badge.badgeImgIdx}
-              img={badge.filePath}
-            />
-          ))
-        ) : (
-          <Text>뱃지 없음</Text>
-        )}
-        <Badge/>
-        <Badge/>
-        <Badge/>
-        <Badge/>
-        <Badge/>
-        <Badge/>
-        <Badge/>
-        <Badge/>
-        <Badge/>
-        <Badge/>
-      </View>
-    </View>
+    </ScrollView>
+
   );
 };
 
@@ -58,6 +31,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     padding: 10,
+    backgroundColor: "white"
   },
   tree: {
     resizeMode: "contain",
@@ -74,13 +48,13 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: "gray",
   },
-  badge: {
+  photos: {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
     flexWrap: "wrap",
-  },
+  }
 });
 
 export default Tree;
