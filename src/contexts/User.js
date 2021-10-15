@@ -1,3 +1,4 @@
+import { getMediaLibraryPermissionsAsync } from 'expo-image-picker';
 import React, { useState, createContext } from 'react';
 
 const UserContext = createContext({
@@ -5,16 +6,15 @@ const UserContext = createContext({
         email: null,
         uid: null,
         userName: null,
-        treeImg: null,
-        totalCarbon: null,
+        trees: null
     },
     dispatch: () => {},
 });
 
 const UserProvider = ({ children }) => {
     const [user, setUser] = useState({});
-    const dispatch = ({ email, uid, userName, treeImg, totalCarbon }) => {
-        setUser({ email, uid, userName, treeImg, totalCarbon });
+    const dispatch = ({ email, uid, userName, trees }) => {
+        setUser({ email, uid, userName, trees });
     };
     const value = { user, dispatch };
     return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

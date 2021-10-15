@@ -31,13 +31,13 @@ const Date = styled.Text`
     margin-top: 10px;
 `;
 
-const TreePolar = ({ name, uri }) => {
+const TreePolar = ({ treeName, treeImg }) => {
     return (
         <Outer>
             <Inner>
-                <Image style={styles.tree} source={require("../../assets/maintree.png")} />
+                <Image style={styles.tree} source={{uri: treeImg}} />
             </Inner>
-            <Date>{name}</Date>
+            <Date>{treeName}</Date>
         </Outer>
     );
     

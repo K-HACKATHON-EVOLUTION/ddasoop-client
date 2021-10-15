@@ -18,6 +18,7 @@ import CourseBanner from "./CourseBanner";
 import CourseMenu from "./CourseMenu";
 import TreePolar from "./TreePolar";
 import Member from "./Member";
+import TreeName from "./TreeName";
 
 export {
     Image,
@@ -39,5 +40,6 @@ export {
     CourseBanner,
     CourseMenu,
     TreePolar,
-    Member
+    Member,
+    TreeName
 };

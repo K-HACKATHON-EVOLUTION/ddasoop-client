@@ -68,8 +68,7 @@ const Login = ({ navigation }) => {
             const user = await login({ email, password });
             const gotuser = await getUser(user.uid);
             user.userName = gotuser.userName;
-            user.treeImg = gotuser.treeImg;
-            user.totalCarbon = gotuser.totalCarbon;
+            user.trees = gotuser.trees;
             dispatch(user);
         } catch (e) {
             Alert.alert('Login Error', e.message);

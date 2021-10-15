@@ -29,6 +29,7 @@ const BadgeList = () => {
     }, []);
 
     return (
+        <ScrollView style={{backgroundColor: "white"}}>
         <View style={styles.badge}>
             {badges.length != 0 ? (
             badges.map((badge) => (
@@ -55,6 +56,7 @@ const BadgeList = () => {
             <Badge/>
             <AdBanner/>
         </View>
+        </ScrollView>
     );
 };
 

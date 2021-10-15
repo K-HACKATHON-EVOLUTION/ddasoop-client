@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { UserContext } from "../contexts";
 import {
     StyleSheet,
@@ -9,8 +9,14 @@ import {
     Button
 } from "react-native";
 
+
 const HomeTree = ({ navigation }) => {
     const { user } = useContext(UserContext);
+    const trees = user?.trees;
+    const treesAmount = user?.trees.length;
+    const treeImg = trees[treesAmount - 1].treeImg;
+    const sumCarbon = (trees[treesAmount - 1].treeCarbon + (treesAmount * 10)).toFixed(3);
+    const [treeName, setTreeName] = useState(trees[treesAmount - 1].treeName);
 
     return (
         <View>
@@ -19,11 +25,10 @@ const HomeTree = ({ navigation }) => {
                     onPress={() => navigation.navigate("Tree")}
                     style={styles.touchable}
                 >
-                    <Image source={{ uri: user?.treeImg }} style={styles.tree} />
+                    <Image source={{ uri: treeImg }} style={styles.tree} />
                 </TouchableOpacity>
                 <View style={styles.column}>
-                    <Text>나무 이름</Text>
-                    <Text style={styles.title}>20.23kg</Text>
+                    <Text style={styles.title}>{sumCarbon}kg</Text>
                     <Text style={styles.subtitle}>총 탄소 저감량</Text>
                 </View>
             </View>
@@ -62,17 +67,18 @@ const styles = StyleSheet.create({
         display: "flex",
         flexDirection: "column",
         justifyContent: "flex-end",
+        alignItems:"flex-start",
         height: 150
     },
     title: {
-        fontSize: 24,
+        fontSize: 23,
         fontWeight: "bold",
-        marginTop: 20,
-        marginRight: 30
+        color: "#848484",
+        marginBottom: 5,
     },
     subtitle: {
-        fontSize: 13,
-        color: "lightgray",
+        fontSize: 15,
+        color: "gray",
         marginBottom: 10
     },
     bar: {
