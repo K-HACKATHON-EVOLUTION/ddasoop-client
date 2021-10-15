@@ -86,7 +86,7 @@ const LogList = ({ navigation }) => {
     };
 
     return (
-        <ScrollView>
+        <ScrollView style={{backgroundColor: "white"}}>
                 <View style={styles.container}>
                     <View style={styles.wrapper}>
                     <Calendar
