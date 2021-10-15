@@ -1,16 +1,41 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     StyleSheet,
     TouchableOpacity,
     View,
     Text,
+    Platform
 } from "react-native";
 import { Stopwatch } from 'react-native-stopwatch-timer';
 import { AdBanner } from "../components";
+import * as Location from 'expo-location';
 
 const Start = () => {
     const [start, setStart] = useState(false);
     const [reset, setReset] = useState(false);
+    const [location, setLocation] = useState(null);
+    const [errorMsg, setErrorMsg] = useState(null);
+
+    useEffect(() => {
+        (async () => {
+            let { status } = await Location.requestForegroundPermissionsAsync();
+            if (status !== 'granted') {
+                setErrorMsg('Permission to access location was denied');
+                return;
+            }
+
+            let location = await Location.getCurrentPositionAsync({});
+            setLocation(location);
+        })();
+    }, []);
+
+    let text = 'Waiting..';
+    if (errorMsg) {
+        text = errorMsg;
+    } else if (location) {
+        text = JSON.stringify(location);
+    }
+
 
     toggleStopwatch = () => {
         setStart(!start);
@@ -27,6 +52,7 @@ const Start = () => {
                 reset={reset}
                 options={options}
             />
+            <Text>{text}</Text>
             <View style={styles.wrapper}>
                 <TouchableOpacity onPress={toggleStopwatch}>
                     <Text style={styles.text}>{!start ? "Start" : "Stop"}</Text>
@@ -35,7 +61,7 @@ const Start = () => {
                     <Text style={styles.text}>Reset</Text>
                 </TouchableOpacity>
             </View>
-            <AdBanner/>
+            <AdBanner />
         </View>
     );
 };
