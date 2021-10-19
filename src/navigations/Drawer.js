@@ -13,6 +13,7 @@ const Drawer = () => {
                 drawerStyle: {
                     backgroundColor: '#ffffff',
                     width: 250,
+                    
                 },
                 headerStyle: {
                     height: Platform.OS === "ios" ? 110 : 70,
