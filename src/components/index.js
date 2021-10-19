@@ -19,6 +19,7 @@ import CourseMenu from "./CourseMenu";
 import TreePolar from "./TreePolar";
 import Member from "./Member";
 import TreeName from "./TreeName";
+import Stairs from "./Stairs";
 
 export {
     Image,
@@ -41,5 +42,6 @@ export {
     CourseMenu,
     TreePolar,
     Member,
-    TreeName
+    TreeName,
+    Stairs
 };
