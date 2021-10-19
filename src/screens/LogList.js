@@ -33,7 +33,7 @@ const LogList = ({ navigation }) => {
     const getLogs = async (uid) => {
         try {
             const { data } = await axios.get(
-                `http://13.125.127.125:8080/api/users/${uid}/logs`
+                `http://13.125.127.125:8080/api/users/${uid}/logLists?month=10`
             );
             setLogs(reform(data));
         } catch (e) {
@@ -43,7 +43,7 @@ const LogList = ({ navigation }) => {
     const getMonthly = async (uid) => {
         try {
             const { data } = await axios.get(
-                `http://13.125.127.125:8080/api/users/${uid}/logs/monthly`
+                `http://13.125.127.125:8080/api/users/${uid}/logs?month=10`
             );
             setMonthly(data);
         } catch (e) {
