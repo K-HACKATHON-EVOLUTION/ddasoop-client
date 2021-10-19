@@ -34,52 +34,50 @@ const Course = ({ route }) => {
             const { data } = await axios.get(
                 `http://13.125.127.125:8080/api/users/${userIdx}/logs/${logIdx}`
             );
-            setLog(data);
+            await setLog(data);
+            const decoded = await polyline.decode(data.route);
+            let obj = {};
+            for (let i = 0; i < decoded.length; i++) {
+                obj = {};
+                obj["latitude"] = decoded[i][0];
+                obj["longitude"] = decoded[i][1];
+                decoded[i] = obj;
+            }
+            setPath(decoded);
         } catch (e) {
             console.log(e);
         }
     };
 
-    const decode = async () => {
-        const decoded = await polyline.decode(log.route);
-        let obj = {};
-        for (let i = 0; i < decoded.length; i++) {
-            obj = {};
-            obj["latitude"] = decoded[i][0];
-            obj["longitude"] = decoded[i][1];
-            decoded[i] = obj;
-        }
-        setPath(decoded);
-    }
-
     useEffect(() => {
         getLog(user?.uid, route.params.index);
-        decode();
     }, []);
 
     return (
         <Container>
             <RowWrapper>
-            <Wrapper>
-                <Text style={styles.title}>
-                    {route.params.name}
-                </Text>
-                <Text style={styles.subtitle}>
-                    {log.distance}km  |  {log.minutes}분  |  난이도 하
-                </Text>
-            </Wrapper>
-            <AntDesign
-                name="hearto"
-                size={25}
-                color={'gray'}
-                style={{ }}
-            />
-            <AntDesign
-                name="sharealt"
-                size={25}
-                color={'gray'}
-                style={{ marginRight: 25 }}
-            />
+                <Wrapper>
+                    <Text style={styles.title}>
+                        {route.params.name}
+                    </Text>
+                    <Text style={styles.subtitle}>
+                        {log.distance}km  |  {log.minutes}분  |  난이도 하
+                    </Text>
+                </Wrapper>
+                <View style={{ flexDirection: 'row' }}>
+                    <AntDesign
+                        name="hearto"
+                        size={25}
+                        color={'gray'}
+                        style={{ marginRight: 25 }}
+                    />
+                    <AntDesign
+                        name="sharealt"
+                        size={25}
+                        color={'gray'}
+                        style={{ marginRight: 25 }}
+                    />
+                </View>
             </RowWrapper>
             <View>
                 <MapView

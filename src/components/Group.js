@@ -37,19 +37,18 @@ const SideText = styled.Text`
   color: ${({ theme }) => theme.headerTintColor};
 `;
 
-const Group = ({ name, size, onPress }) => {
+const Group = ({ name, img, size, carbon, onPress }) => {
   return (
     <TouchableOpacity onPress={() => onPress()}>
       <Container>
         <RowWrapper>
-          {/* <StyledImage source={require('../../assets/maintree.png')}></StyledImage> */}
-          <StyledImage></StyledImage>
+        <StyledImage source={{ uri: `${img}`}} />
           <ColumnWrapper>
             <TitleText>{name}</TitleText>
             <SubText>멤버 수 {size}명</SubText>
           </ColumnWrapper>
         </RowWrapper>
-        <SideText>1028kg</SideText>
+        <SideText>{carbon}kg</SideText>
       </Container>
     </TouchableOpacity>
   );

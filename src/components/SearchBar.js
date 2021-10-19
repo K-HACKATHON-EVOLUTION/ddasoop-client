@@ -21,26 +21,21 @@ const StyledTextInput = styled.TextInput.attrs(({ theme }) => ({
 `;
 
 const SearchBar = ({
-  value,
   onChangeText,
   onSubmitEditing,
-  placeholder,
   returnKeyType,
-  maxLength,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   return (
     <Container>
       <StyledTextInput
         isFocused={isFocused}
-        value={value}
         onChangeText={onChangeText}
         onSubmitEditing={onSubmitEditing}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        placeholder={placeholder}
+        placeholder="검색할 숲의 이름을 입력해 주세요"
         returnKeyType={returnKeyType}
-        maxLength={maxLength}
         autoCapitalize="none"
         autoCorrect={false}
         textContentType="none" // iOS only
@@ -48,15 +43,6 @@ const SearchBar = ({
       />
     </Container>
   );
-};
-
-SearchBar.propTypes = {
-  value: PropTypes.string.isRequired,
-  onChangeText: PropTypes.func,
-  onSubmitEditing: PropTypes.func,
-  placeholder: PropTypes.string,
-  returnKeyType: PropTypes.oneOf(["done", "next"]),
-  maxLength: PropTypes.number,
 };
 
 export default SearchBar;

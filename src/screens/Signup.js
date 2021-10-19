@@ -98,8 +98,7 @@ const Signup = () => {
             await makeUser(user.uid, user.displayName);
             const gotuser = await getUser(user.uid);
             user.userName = gotuser.userName;
-            user.treeImg = gotuser.treeImg;
-            user.totalCarbon = gotuser.totalCarbon;
+            user.trees = gotuser.trees;
             dispatch(user);
         } catch (e) {
             Alert.alert("Signup Error", e.message);

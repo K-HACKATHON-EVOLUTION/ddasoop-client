@@ -15,8 +15,7 @@ const HomeTree = ({ navigation }) => {
     const trees = user?.trees;
     const treesAmount = user?.trees.length;
     const treeImg = trees[treesAmount - 1].treeImg;
-    const sumCarbon = (trees[treesAmount - 1].treeCarbon + (treesAmount * 10)).toFixed(3);
-    const [treeName, setTreeName] = useState(trees[treesAmount - 1].treeName);
+    const sumCarbon = (trees[treesAmount - 1].treeCarbon + ((treesAmount-1) * 10)).toFixed(3);
 
     return (
         <View>

@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
 import styled from "styled-components/native";
 import PropTypes from "prop-types";
-import { Text, TouchableOpacity, View } from "react-native";
+import { ImageBackground, Text, TouchableOpacity, View } from "react-native";
 import { UserContext } from "../contexts/User";
+import { useNavigation } from '@react-navigation/native';
 
-const Container = styled.View`
+const Container = styled.ImageBackground`
   height: 120px;
   width: 100%;
   align-items: center;
@@ -16,16 +17,17 @@ const Container = styled.View`
 `;
 
 const MyGroup = ({ name, img, onPress }) => {
+  const navigation = useNavigation(); 
   return (
     <View>
       {name ? (
         <TouchableOpacity onPress={() => onPress()}>
-          <Container>
-            <Text style={{ fontSize: 17 }}>{name}</Text>
+          <Container source={{ uri: `${img}`}}>
+              <Text style={{ fontSize: 17 }}>{name}</Text>
           </Container>
         </TouchableOpacity>
       ) : (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("CreateGroup")}>
           <Container>
             <Text style={{ fontSize: 17 }}>숲 만들기</Text>
           </Container>
