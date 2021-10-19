@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components/native";
-import { ScrollView } from "react-native";
+import { ScrollView, Text } from "react-native";
 import { theme } from "../theme";
 import { ThemeProvider } from "styled-components";
 import { MyGroup, SearchBar, Group } from "../components";
 import { UserContext } from "../contexts";
 import axios from "axios";
+import { getBackgroundPermissionsAsync, getForegroundPermissionsAsync } from "expo-location";
+import { setTestDeviceIDAsync } from "expo-ads-admob";
+
 
 const Container = styled.View`
   flex-direction: column;
@@ -20,7 +23,6 @@ const StyledText = styled.Text`
 
 const GroupList = ({ navigation }) => {
   const { user } = useContext(UserContext);
-  const [search, setSearch] = useState("");
   const [groups, setGroup] = useState([]);
   const [mygroup, setMygroup] = useState({});
 
@@ -46,23 +48,40 @@ const GroupList = ({ navigation }) => {
     }
   };
 
+  const _searchGroup = async (search) => {
+    try {
+      const { data } = await axios.get(
+        `http://13.125.127.125:8080/api/forest/search?forest_name=${search}`
+      );
+      setGroup(data);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   useEffect(() => {
     getMygroup(user?.uid);
     getGroups();
-  }, [groups]);
+  }, []);
 
-  const _onPress = (group) => {
+  const setNewGroup = (group) => {
+    setMygroup(group);
+  }
+
+  const _onPress = (group, setNewGroup) => {
     navigation.navigate("Group", {
       index: group.forestIdx,
       leader: group.leader,
       name: group.forestName,
       size: group.size,
       img: group.forestImg,
+      carbon: group.carbon,
+      setNewGroup: setNewGroup
     });
   };
 
   return (
-    <ScrollView style={{backgroundColor: "white"}}>
+    <ScrollView style={{ backgroundColor: "white" }}>
       <ThemeProvider theme={theme}>
         <Container>
           <StyledText>MY 숲</StyledText>
@@ -73,19 +92,22 @@ const GroupList = ({ navigation }) => {
           />
           <StyledText>숲 둘러보기</StyledText>
           <SearchBar
-            value={search}
-            onChangeText={(text) => setSearch(text)}
-            placeholder="검색"
+            onChangeText={(text) => _searchGroup(text)}
+            onSubmitEditing={(text) => _searchGroup(text)}
             returnKeyType="done"
           />
-          {groups.map((group) => (
-            <Group
-              key={group.forestIdx}
-              name={group.forestName}
-              size={group.size}
-              onPress={() => _onPress(group)}
-            />
-          ))}
+          {groups.length !== 0 ?
+            (groups.map((group) => (
+              <Group
+                key={group.forestIdx}
+                name={group.forestName}
+                img={group.forestImg}
+                size={group.size}
+                carbon={group.carbon.toFixed(2)}
+                onPress={() => _onPress(group, setNewGroup)}
+              />
+            ))) :
+            <Text>그룹이 없습니다</Text>}
         </Container>
       </ThemeProvider>
     </ScrollView>
