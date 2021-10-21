@@ -1,23 +1,20 @@
 import React, { useState, useContext, useEffect } from "react";
 import styled from "styled-components/native";
-import {
-    StyleSheet,
-    ScrollView,
-    View,
-    Text,
-} from "react-native";
+import { StyleSheet, ScrollView, View, Text } from "react-native";
 import { Badge, Button, Record } from "../components";
 import { UserContext } from "../contexts";
 import axios from "axios";
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
 
+const currentMonth = new Date().getMonth() + 1;
+
 const NoRecord = styled.View`
-    height: 70px;
-    width: 100%;
+    height: 200px;
+    width: 300px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     background-color: #e0e0e0;
     margin-bottom: 10px;
     border-radius: 10px;
@@ -27,33 +24,39 @@ const NoRecord = styled.View`
 
 const LogList = ({ navigation }) => {
     const { user } = useContext(UserContext);
-    const [logs, setLogs] = useState([]);
-    const [monthly, setMonthly] = useState({});
+    const [monthlyLogs, setMonthlyLogs] = useState([]);
+    const [monthlyDates, setMonthlyDates] = useState({});
+    const [coloredDates, setColoredDates] = useState({});
 
-    const getLogs = async (uid) => {
+    const getMonthlyLogs = async (uid, month) => {
         try {
             const { data } = await axios.get(
-                `http://13.125.127.125:8080/api/users/${uid}/logLists?month=10`
+                `http://13.125.127.125:8080/api/users/${uid}/logLists?month=${month}`
             );
-            setLogs(reform(data));
+            setMonthlyLogs(reform(data));
         } catch (e) {
-            console.log("getLogs error");
+            console.log("getMonthlyLogs error");
         }
     };
-    const getMonthly = async (uid) => {
+    const getMonthlyDates = async (uid, month) => {
         try {
             const { data } = await axios.get(
-                `http://13.125.127.125:8080/api/users/${uid}/logs?month=10`
+                `http://13.125.127.125:8080/api/users/${uid}/logs?month=${month}`
             );
-            setMonthly(data);
+            coloring(data.logCnt, data.logDates);
+            setMonthlyDates(data);
         } catch (e) {
-            console.log("getMonthly error");
+            console.log(e);
         }
     };
+    const _onMonthChange = async (month) => {
+        getMonthlyLogs(user?.uid, month);
+        getMonthlyDates(user?.uid, month);
+    }
 
     useEffect(() => {
-        getLogs(user?.uid);
-        getMonthly(user?.uid);
+        getMonthlyLogs(user?.uid, currentMonth);
+        getMonthlyDates(user?.uid, currentMonth);
     }, []);
 
     const reform = (logs) => {
@@ -67,7 +70,6 @@ const LogList = ({ navigation }) => {
                 else if (log.dayOfWeek === 5) log.dayOfWeek = "FRI";
                 else if (log.dayOfWeek === 6) log.dayOfWeek = "SAT";
                 else log.dayOfWeek = "SUN";
-
                 date = log.logDate.slice(2, 4) + "/";
                 date += log.logDate.slice(5, 7) + "/";
                 date += log.logDate.slice(8, 10);
@@ -76,6 +78,26 @@ const LogList = ({ navigation }) => {
         }
         return logs;
     };
+
+    const coloring = (logCnt, logDates) => {
+        let obj = {};
+        let date = '';
+        while (logCnt > 0) {
+            date = logDates[--logCnt];
+            obj[date] = {
+                customStyles: {
+                    container: {
+                        backgroundColor: '#9CC27E'
+                    },
+                    text: {
+                        color: 'white',
+                        fontWeight: 'bold'
+                    }
+                }
+            }
+        }
+        setColoredDates(obj);
+    }
 
     const _onPress = (log) => {
         navigation.navigate("Log", {
@@ -86,16 +108,15 @@ const LogList = ({ navigation }) => {
     };
 
     return (
-        <ScrollView style={{backgroundColor: "white"}}>
-                <View style={styles.container}>
-                    <View style={styles.wrapper}>
+        <ScrollView style={{ backgroundColor: "white" }}>
+            <View style={styles.container}>
+                <View style={styles.wrapper}>
                     <Calendar
                         style={{
                             height: 340, width: 280
                         }}
-                        current={'2021-10-10'}
                         monthFormat={'yyyy MM'}
-                        onMonthChange={(month) => { console.log('month changed', month) }}
+                        onMonthChange={(month) => { _onMonthChange(month.month) }}
                         hideExtraDays={true}
                         disableMonthChange={true}
                         hideDayNames={true}
@@ -103,13 +124,12 @@ const LogList = ({ navigation }) => {
                         onPressArrowRight={addMonth => addMonth()}
                         disableAllTouchEventsForDisabledDays={true}
                         enableSwipeMonths={true}
-                        markingType={'period'}
-                        markedDates={{
-                            '2021-10-10': { disabled: true, startingDay: true, color: '#9CC27E', endingDay: true },
-                            '2021-10-11': { disabled: true, startingDay: true, color: '#9CC27E', endingDay: true }
-                        }}
+                        markingType={'custom'}
+                        markedDates={coloredDates}
                         theme={{
                             arrowColor: '#9CC27E',
+                            todayTextColor: '#9CC27E',
+                            monthTextColor: '#848484',
                             'stylesheet.calendar.header': {
                                 monthText: {
                                     fontSize: 20,
@@ -119,15 +139,15 @@ const LogList = ({ navigation }) => {
                                     flexDirection: 'row',
                                     justifyContent: 'space-between'
                                 },
-                            }
+                            },
                         }}
                     />
-                    <Text style={styles.subtitle}>완주한 코스 {monthly.logCnt}개</Text>
-                    <Text style={styles.subtitle}>완성한 나무 {monthly.treeAmount}그루</Text>
+                    <Text style={styles.subtitle}>완주한 코스 {monthlyDates.logCnt}개</Text>
+                    <Text style={styles.subtitle}>완성한 나무 {monthlyDates.treeAmount}그루</Text>
                 </View>
                 <View style={styles.wrapper}>
-                    {logs.length != 0 ? (
-                        logs.map((log) => (
+                    {monthlyLogs.length != 0 ? (
+                        monthlyLogs.map((log) => (
                             <Record
                                 key={log.logIdx}
                                 date={log.logDate}
@@ -140,12 +160,12 @@ const LogList = ({ navigation }) => {
                         ))
                     ) : (
                         <NoRecord>
-                            <Text>기록 시작 버튼 연결되게 해야 함</Text>
+                            <Text>기록이 없습니다!</Text>
                         </NoRecord>
                     )}
                 </View>
-                </View>
-        </ScrollView >
+            </View>
+        </ScrollView>
     );
 };
 
@@ -157,7 +177,7 @@ const styles = StyleSheet.create({
     },
     wrapper: {
         alignItems: "center",
-        padding: 20        
+        padding: 20
     },
     title: {
         fontSize: 23,
