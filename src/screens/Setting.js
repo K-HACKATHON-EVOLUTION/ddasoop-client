@@ -81,7 +81,6 @@ const Setting = ({ navigation }) => {
                 <Text style={styles.textStyle}>취소</Text>
               </TouchableOpacity>
             </View>
-
           </View>
         </View>
       </Modal>
