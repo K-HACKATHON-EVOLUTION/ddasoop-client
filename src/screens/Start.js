@@ -9,6 +9,7 @@ import {
 import { Stopwatch } from 'react-native-stopwatch-timer';
 import { AdBanner } from "../components";
 import * as Location from 'expo-location';
+import * as TaskManager from 'expo-task-manager';
 
 const Start = () => {
     const [start, setStart] = useState(false);
@@ -19,13 +20,22 @@ const Start = () => {
     useEffect(() => {
         (async () => {
             let { status } = await Location.requestForegroundPermissionsAsync();
-            if (status !== 'granted') {
-                setErrorMsg('Permission to access location was denied');
-                return;
+            if (status === 'granted') {
+                await Location.startLocationUpdatesAsync('task', {
+                    accuracy: Location.Accuracy.Balanced,
+                });
+                TaskManager.defineTask('task', ({ data, error }) => {
+                    console.log(data);
+                    if (error) {
+                        setErrorMsg(error);
+                        return;
+                    }
+                    if (data) {
+                        const { locations } = data;
+                        setLocation(locations);
+                    }
+                });
             }
-
-            let location = await Location.getCurrentPositionAsync({});
-            setLocation(location);
         })();
     }, []);
 
@@ -53,18 +63,18 @@ const Start = () => {
                 options={options}
             />
             <Text>{text}</Text>
-            <View style={styles.wrapper}>
-                <TouchableOpacity onPress={toggleStopwatch}>
-                    <Text style={styles.text}>{!start ? "Start" : "Stop"}</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={resetStopwatch}>
-                    <Text style={styles.text}>Reset</Text>
-                </TouchableOpacity>
-            </View>
+            <TouchableOpacity onPress={toggleStopwatch}>
+                <Text style={styles.text}>{!start ? "Start" : "Stop"}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={resetStopwatch}>
+                <Text style={styles.subtext}>{!start ? "  " : "Reset"}</Text>
+            </TouchableOpacity>
             <AdBanner />
         </View>
     );
 };
+
+
 
 const options = {
     container: {
@@ -82,6 +92,7 @@ const options = {
         color: '#FFF',
     }
 };
+
 const styles = StyleSheet.create({
     container: {
         display: "flex",
@@ -97,7 +108,12 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 30,
         color: '#9CC27E',
-        margin: 50,
+        marginBottom: 20
+    },
+    subtext: {
+        fontSize: 20,
+        color: '#848484',
+        marginBottom: 20
     }
 });
 export default Start;

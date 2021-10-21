@@ -94,6 +94,7 @@ const GroupList = ({ navigation }) => {
           <SearchBar
             onChangeText={(text) => _searchGroup(text)}
             onSubmitEditing={(text) => _searchGroup(text)}
+            placeholder="검색할 숲의 이름을 입력해 주세요"
             returnKeyType="done"
           />
           {groups.length !== 0 ?

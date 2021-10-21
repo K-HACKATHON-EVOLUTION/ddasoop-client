@@ -24,6 +24,7 @@ const SearchBar = ({
   onChangeText,
   onSubmitEditing,
   returnKeyType,
+  placeholder
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   return (
@@ -34,7 +35,7 @@ const SearchBar = ({
         onSubmitEditing={onSubmitEditing}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        placeholder="검색할 숲의 이름을 입력해 주세요"
+        placeholder={placeholder}
         returnKeyType={returnKeyType}
         autoCapitalize="none"
         autoCorrect={false}

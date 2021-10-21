@@ -12,9 +12,10 @@ const Drawer = () => {
             screenOptions={{
                 drawerStyle: {
                     backgroundColor: '#ffffff',
-                    width: 250,
-                    
+                    width: 200, 
                 },
+                drawerActiveTintColor: "#fff",
+                drawerActiveBackgroundColor: "#9CC27E",
                 headerStyle: {
                     height: Platform.OS === "ios" ? 110 : 70,
                     backgroundColor: "#ffffff",
