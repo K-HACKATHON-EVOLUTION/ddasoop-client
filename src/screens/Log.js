@@ -25,27 +25,23 @@ const Log = ({ route }) => {
       const { data } = await axios.get(
         `http://13.125.127.125:8080/api/users/${userIdx}/logs/${logIdx}`
       );
-      setLog(data);
+      await setLog(data);
+      const decoded = await polyline.decode(data.route);
+      let obj = {};
+      for (let i = 0; i < decoded.length; i++) {
+        obj = {};
+        obj["latitude"] = decoded[i][0];
+        obj["longitude"] = decoded[i][1];
+        decoded[i] = obj;
+      }
+      setPath(decoded);
     } catch (e) {
       console.log(e);
     }
   };
 
-  const decode = async() => {
-    const decoded = await polyline.decode(log.route);
-    let obj = {};
-    for (let i = 0; i < decoded.length; i++) {
-      obj = {};
-      obj["latitude"] = decoded[i][0];
-      obj["longitude"] = decoded[i][1];
-      decoded[i] = obj;
-    }
-    setPath(decoded);
-  }
-
   useEffect(() => {
     getLog(user?.uid, route.params.index);
-    decode();
   }, []);
 
   return (
