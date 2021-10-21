@@ -18,6 +18,7 @@
     "expo-ads-admob": "~10.1.2",
     "expo-app-loading": "^1.1.2",
     "expo-image-picker": "^10.2.3",
+    "expo-location": "~12.1.2",
     "expo-permissions": "^12.1.1",
     "expo-status-bar": "~1.0.4",
     "firebase": "^8.9.0",
@@ -40,7 +41,7 @@
     "react-navigation-drawer": "^2.7.1",
     "styled-components": "^5.3.0",
     "victory-native": "^35.5.5",
-    "expo-location": "~12.1.2"
+    "expo-task-manager": "~9.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"
