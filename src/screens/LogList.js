@@ -57,7 +57,7 @@ const LogList = ({ navigation }) => {
     useEffect(() => {
         getMonthlyLogs(user?.uid, currentMonth);
         getMonthlyDates(user?.uid, currentMonth);
-    }, []);
+    }, [coloredDates]);
 
     const reform = (logs) => {
         let date = "";
