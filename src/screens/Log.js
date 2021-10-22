@@ -19,6 +19,10 @@ const Log = ({ route }) => {
   const { user } = useContext(UserContext);
   const [log, setLog] = useState({});
   const [path, setPath] = useState([]);
+  const [initialLat, setInitialLat] = useState(37.56664867);
+  const [initialLng, setInitialLng] = useState(126.9784088);
+  const [latDelta, setLatDelta] = useState(0.0085);
+  const [lngDelta, setLngDelta] = useState(0.0085);
 
   const getLog = async (userIdx, logIdx) => {
     try {
@@ -28,13 +32,33 @@ const Log = ({ route }) => {
       await setLog(data);
       const decoded = await polyline.decode(data.route);
       let obj = {};
+      let lat = [];
+      let lng = [];
       for (let i = 0; i < decoded.length; i++) {
         obj = {};
         obj["latitude"] = decoded[i][0];
+        lat.push(decoded[i][0]);
         obj["longitude"] = decoded[i][1];
+        lng.push(decoded[i][1]);
         decoded[i] = obj;
       }
-      setPath(decoded);
+      await setPath(decoded);
+      let maxLat = lat.reduce((prev, cur)=>{
+        return prev > cur ? prev : cur;
+      });
+      let minLat = lat.reduce((prev, cur)=>{
+        return prev > cur ? cur : prev;
+      });
+      let maxLng = lng.reduce((prev, cur)=>{
+        return prev > cur ? prev : cur;
+      });
+      let minLng = lng.reduce((prev, cur)=>{
+        return prev > cur ? cur : prev;
+      });
+      setInitialLat((maxLat+minLat)/2);
+      setInitialLng((maxLng+minLng)/2);
+      setLatDelta(maxLat-minLat+0.002);
+      setLngDelta(maxLng-minLng+0.002);
     } catch (e) {
       console.log(e);
     }
@@ -53,15 +77,21 @@ const Log = ({ route }) => {
         <MapView
           style={styles.map}
           initialRegion={{
-            latitude: 38.5,
-            longitude: -120.2,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
+            latitude: initialLat,
+            longitude: initialLng,
+            latitudeDelta: latDelta,
+            longitudeDelta: lngDelta,
+          }}
+          region={{
+            latitude: initialLat,
+            longitude: initialLng,
+            latitudeDelta: latDelta,
+            longitudeDelta: lngDelta,
           }}
         >
           <Polyline
             coordinates={path}
-            strokeColor="green"
+            strokeColor="#9CC27E"
             strokeWidth={5}
           />
         </MapView>
