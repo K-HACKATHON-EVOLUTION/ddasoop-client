@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Tree, Alert, Log, Start, CourseList, Course, Group, GroupSetting, CreateGroup, MemberSetting } from "../screens";
+import { Tree, Alert, LogList, Log, Start, CourseList, Course, Group, GroupSetting, CreateGroup, MemberSetting } from "../screens";
 import { AntDesign } from "@expo/vector-icons";
 import { Platform, View } from "react-native";
 import { UserContext } from "../contexts";
@@ -38,6 +38,7 @@ const MainStack = () => {
         },
       }}
     >
+      
       <Stack.Screen
         name="Drawer"
         component={Drawer}
@@ -67,6 +68,11 @@ const MainStack = () => {
         name="MemberSetting"
         component={MemberSetting}
         options={{ headerTitle: "그룹원 설정" }}
+      />
+      <Stack.Screen
+        name="LogList"
+        component={LogList}
+        options={{ headerTitle: "나의 기록" }}
       />
       <Stack.Screen
         name="Log"
