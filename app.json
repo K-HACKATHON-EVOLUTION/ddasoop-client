@@ -34,7 +34,11 @@
       },
       "package": "com.evolution.ddasoop",
       "versionCode": 1,
-      "permissions": ["CAMERA"],
+      "permissions": [
+        "CAMERA",
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_BACKGROUND_LOCATION"
+      ],
       "config": {
         "googleMobileAdsAppId": "ca-app-pub-1309743501609664/7107726105"
       }
