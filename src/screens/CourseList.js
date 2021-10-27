@@ -11,8 +11,18 @@ import { UserContext } from "../contexts";
 
 const CourseList = ({ navigation, route }) => {
     const { user } = useContext(UserContext);
+    const [courses, setCourses] = useState([]);
 
-    const _onPress = (course) => {
+    const getCourses = async () => {
+        try {
+            const { data } = await axios.get(
+                `http://13.125.127.125:8080/api/courses`
+            );
+            setCourses(data.slice(0, 3));
+        } catch (e) {
+            console.log(e);
+        }
+    }; const _onPress = (course) => {
         navigation.navigate("Course", {
             id: course.id,
             name: course.name,
@@ -26,7 +36,7 @@ const CourseList = ({ navigation, route }) => {
                 <CourseBanner
                     key={course.id}
                     name={course.name}
-                    index={1}
+                    select={course.select}
                     onPress={() => _onPress(course)}
                 />
             ))}
