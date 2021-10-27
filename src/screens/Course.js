@@ -33,12 +33,12 @@ const Course = ({ route }) => {
     const [latDelta, setLatDelta] = useState(0.0085);
     const [lngDelta, setLngDelta] = useState(0.0085);
 
-    const getLog = async (userIdx, logIdx) => {
+    const getCourse = async (courseIdx) => {
         try {
             const { data } = await axios.get(
-                `http://13.125.127.125:8080/api/users/${userIdx}/logs/${logIdx}`
+                `http://13.125.127.125:8080/api/course/${courseIdx}`
             );
-            await setLog(data);
+            await setCourse(data);
             const decoded = await polyline.decode(data.route);
             let obj = {};
             let lat = [];
@@ -69,12 +69,12 @@ const Course = ({ route }) => {
             setLatDelta(maxLat - minLat + 0.002);
             setLngDelta(maxLng - minLng + 0.002);
         } catch (e) {
-            console.log(e);
+            console.log('이건가');
         }
     };
 
     useEffect(() => {
-        getLog(user?.uid, route.params.index);
+        getCourse(route.params.index);
     }, []);
 
     return (
