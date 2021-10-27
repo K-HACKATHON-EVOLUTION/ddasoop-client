@@ -43,22 +43,22 @@ const Log = ({ route }) => {
         decoded[i] = obj;
       }
       await setPath(decoded);
-      let maxLat = lat.reduce((prev, cur)=>{
+      let maxLat = lat.reduce((prev, cur) => {
         return prev > cur ? prev : cur;
       });
-      let minLat = lat.reduce((prev, cur)=>{
+      let minLat = lat.reduce((prev, cur) => {
         return prev > cur ? cur : prev;
       });
-      let maxLng = lng.reduce((prev, cur)=>{
+      let maxLng = lng.reduce((prev, cur) => {
         return prev > cur ? prev : cur;
       });
-      let minLng = lng.reduce((prev, cur)=>{
+      let minLng = lng.reduce((prev, cur) => {
         return prev > cur ? cur : prev;
       });
-      setInitialLat((maxLat+minLat)/2);
-      setInitialLng((maxLng+minLng)/2);
-      setLatDelta(maxLat-minLat+0.002);
-      setLngDelta(maxLng-minLng+0.002);
+      setInitialLat((maxLat + minLat) / 2);
+      setInitialLng((maxLng + minLng) / 2);
+      setLatDelta(maxLat - minLat + 0.002);
+      setLngDelta(maxLng - minLng + 0.002);
     } catch (e) {
       console.log(e);
     }
@@ -70,7 +70,7 @@ const Log = ({ route }) => {
 
   return (
     <Container>
-      <View style={{width}}>
+      <View style={{ width }}>
         <Text style={styles.title}>{route.params.date} {route.params.day}</Text>
       </View>
       <MapContainer>
@@ -112,7 +112,7 @@ const Log = ({ route }) => {
         <Textbox title={log.distance + "km"} subtitle={"거리"} />
         <Textbox title={log.carbon + "kg"} subtitle={"탄소 저감"} />
       </View>
-      <AdBanner/>
+      {/* <AdBanner/> */}
     </Container>
   );
 };
