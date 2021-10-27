@@ -1,46 +1,67 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import { View, Text, StyleSheet } from 'react-native';
 import { CourseBanner, AdBanner, CourseMenu } from '../components';
+import axios from 'axios';
 
-const courses = [
-    { _id: 1, name: '전체 코스 보기', diff: true, courseList: [{"id": 1, "name": "불광천 코스"}, {"id": 2, "name": "홍제천 코스"}]},
-    { _id: 2, name: '내가 저장한 코스', diff: true, courseList: [{"id": 1, "name": "dd"}]},
-    { _id: 3, name: '한강 & 하천', diff: false, courseList: [{"id": 1, "name": "dd"}]},
-    { _id: 4, name: '공원', diff: false, courseList: [{"id": 1, "name": "dd"}]},
-    { _id: 5, name: '도심', diff: false, courseList: [{"id": 1, "name": "dd"}]},
-    { _id: 6, name: '문화지', diff: false, courseList: [{"id": 1, "name": "dd"}]},
+
+const themes = [
+    { _id: 0, name: '전체 코스 보기', diff: true },
+    { _id: 1, name: '내가 저장한 코스', diff: true },
+    { _id: 2, name: '한강 & 하천', diff: false },
+    { _id: 3, name: '공원', diff: false },
+    { _id: 4, name: '도심', diff: false },
+    { _id: 5, name: '문화지', diff: false },
 ];
 
 const CourseMain = ({ navigation }) => {
+    const [courses, setCourses] = useState([]);
+
+    const getTop3Courses = async () => {
+        try {
+            const { data } = await axios.get(
+                `http://13.125.127.125:8080/api/course/top3`
+            );
+            setCourses(data.slice(0, 3));
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+    useEffect(() => {
+        getTop3Courses();
+    }, []);
+
     const _onPress = course => {
         navigation.navigate('CourseList', {
-            id: course._id,
             name: course.name,
-            diff: course.diff,
-            courseList: course.courseList
+            select: course._id
         });
     };
 
     return (
         <View style={styles.container}>
             <Text style={styles.text1}>🏆 월간 코스 랭킹 TOP 3 🏆</Text>
-            <CourseBanner onPress={() => { }} name={"강바람 맞으며 달리는 한강 라이딩 코스"} />
-            <CourseBanner onPress={() => { }} name={"도심 속 궁궐 일대를 돌아보는 고궁 라이딩 코스"} />
-            <CourseBanner onPress={() => { }} name={"데이트하기 좋은 경춘선숲길 라이딩 코스"} />
-            <Text style={styles.text2}>⛰ 테마별 코스 ⛰</Text>
-            <View style={styles.menu}>
-                {courses.map(course => (
-                <CourseMenu
-                    key={course._id}
-                    name={course.name}
-                    diff={course.diff}
-                    courseList={course.courseList}
-                    onPress={() => _onPress(course)}
+            {courses.map(course => (
+                <CourseBanner
+                    key={course.course_idx}
+                    onPress={() => { }}
+                    name={course.course_name}
                 />
             ))}
+            <Text style={styles.text2}>⛰ 테마별 코스 ⛰</Text>
+            <View style={styles.menu}>
+                {themes.map(theme => (
+                    <CourseMenu
+                        key={theme._id}
+                        name={theme.name}
+                        diff={theme.diff}
+                        select={theme._id}
+                        onPress={() => _onPress(theme)}
+                    />
+                ))}
             </View>
-            <AdBanner />
+            {/* <AdBanner /> */}
         </View>
     );
 };

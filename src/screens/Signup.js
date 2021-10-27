@@ -64,23 +64,23 @@ const Signup = () => {
 
     const makeUser = async (uid, name) => {
         try {
-        await axios.post(
-            "http://13.125.127.125:8080/api/users/",
-            {
-                "userIdx": uid,
-                "userName": name,
-            });
+            await axios.post(
+                "http://13.125.127.125:8080/api/users/",
+                {
+                    "userIdx": uid,
+                    "userName": name,
+                });
         } catch (e) {
             console.log('makeUser error');
         }
     };
 
     const getUser = async (uid) => {
-        try{
-            const {data: user} = await axios.get(`http://13.125.127.125:8080/api/users/${uid}`);
+        try {
+            const { data: user } = await axios.get(`http://13.125.127.125:8080/api/users/${uid}`);
             return user;
         }
-        catch(e){
+        catch (e) {
             console.log("getUser error");
         }
     }
@@ -109,61 +109,61 @@ const Signup = () => {
 
     return (
         <KeyboardAwareScrollView extraScrollHeight={20}>
-        <Container>
-            <Image
-            rounded
-            url={photoUrl}
-            showButton
-            onChangeImage={(url) => setPhotoUrl(url)}
-            />
-            <Input
-            label="Name"
-            value={name}
-            onChangeText={(text) => setName(text)}
-            onSubmitEditing={() => {
-                setName(name.trim());
-                emailRef.current.focus();
-            }}
-            onBlur={() => setName(name.trim())}
-            placeholder="Name"
-            returnKeyType="next"
-            />
-            <Input
-            ref={emailRef}
-            label="Email"
-            value={email}
-            onChangeText={(text) => setEmail(removeWhitespace(text))}
-            onSubmitEditing={() => passwordRef.current.focus()}
-            placeholder="Email"
-            returnKeyType="next"
-            />
-            <Input
-            ref={passwordRef}
-            label="Password"
-            value={password}
-            onChangeText={(text) => setPassword(removeWhitespace(text))}
-            onSubmitEditing={() => passwordConfirmRef.current.focus()}
-            placeholder="Password"
-            returnKeyType="next"
-            isPassword
-            />
-            <Input
-            ref={passwordConfirmRef}
-            label="Password Confirm"
-            value={passwordConfirm}
-            onChangeText={(text) => setPasswordConfirm(removeWhitespace(text))}
-            onSubmitEditing={_handleSignupButtonPress}
-            placeholder="Password Confirm"
-            returnKeyType="done"
-            isPassword
-            />
-            <ErrorText>{errorMessage}</ErrorText>
-            <Button
-            title="완료"
-            onPress={_handleSignupButtonPress}
-            disabled={disabled}
-            />
-        </Container>
+            <Container>
+                <Image
+                    rounded
+                    url={photoUrl}
+                    showButton
+                    onChangeImage={(result) => setPhotoUrl(result)}
+                />
+                <Input
+                    label="Name"
+                    value={name}
+                    onChangeText={(text) => setName(text)}
+                    onSubmitEditing={() => {
+                        setName(name.trim());
+                        emailRef.current.focus();
+                    }}
+                    onBlur={() => setName(name.trim())}
+                    placeholder="Name"
+                    returnKeyType="next"
+                />
+                <Input
+                    ref={emailRef}
+                    label="Email"
+                    value={email}
+                    onChangeText={(text) => setEmail(removeWhitespace(text))}
+                    onSubmitEditing={() => passwordRef.current.focus()}
+                    placeholder="Email"
+                    returnKeyType="next"
+                />
+                <Input
+                    ref={passwordRef}
+                    label="Password"
+                    value={password}
+                    onChangeText={(text) => setPassword(removeWhitespace(text))}
+                    onSubmitEditing={() => passwordConfirmRef.current.focus()}
+                    placeholder="Password"
+                    returnKeyType="next"
+                    isPassword
+                />
+                <Input
+                    ref={passwordConfirmRef}
+                    label="Password Confirm"
+                    value={passwordConfirm}
+                    onChangeText={(text) => setPasswordConfirm(removeWhitespace(text))}
+                    onSubmitEditing={_handleSignupButtonPress}
+                    placeholder="Password Confirm"
+                    returnKeyType="done"
+                    isPassword
+                />
+                <ErrorText>{errorMessage}</ErrorText>
+                <Button
+                    title="완료"
+                    onPress={_handleSignupButtonPress}
+                    disabled={disabled}
+                />
+            </Container>
         </KeyboardAwareScrollView>
     );
 };

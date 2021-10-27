@@ -94,7 +94,7 @@ const Image = ({ url, imageStyle, rounded, showButton, onChangeImage }) => {
 Image.defaultProps = {
   rounded: false,
   showButton: false,
-  onChangeImage: () => {},
+  onChangeImage: () => { },
 };
 
 Image.propTypes = {

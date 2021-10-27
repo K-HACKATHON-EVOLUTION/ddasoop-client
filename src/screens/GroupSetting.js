@@ -6,6 +6,7 @@ import { MyGroup, SearchBar, Group, Image, Input, Button, SettingBar } from "../
 import { UserContext } from "../contexts";
 import { images } from "../utils/images";
 import { TouchableOpacity, View, Modal, StyleSheet, Text } from "react-native";
+import axios from 'axios';
 
 const Container = styled.View`
     flex-direction: column;

@@ -9,21 +9,21 @@ const Container = styled.TouchableOpacity`
     width: 48%;
     margin: 1%;
     background-color: ${({ diff }) =>
-        diff ? '#9CC27E' : 'black'};
+        diff ? '#8CAF71' : '#aad48a'};
 `;
 const Title = styled.Text`
     height: 30px;
     line-height: 30px;
     font-size: 16px;
     color: white;
+    font-weight: bold;
 `;
 
-const CourseMenu = ({ diff, name, courseList, onPress }) => {
+const CourseMenu = ({ diff, name, onPress }) => {
     return (
         <Container
             onPress={onPress}
             diff={diff}
-            courseList={courseList}
         >
             <Title>{name}</Title>
         </Container>

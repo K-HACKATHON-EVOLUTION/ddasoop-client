@@ -36,14 +36,14 @@ const Home = ({ navigation }) => {
     });
   }, []);
   return (
-      <View style={styles.container}>
-          <HomeTree navigation={navigation}/>
-          <View style={styles.wrapper}>
-            <Shortcut title="나의 숲 바로가기"/>
-            <Shortcut title="이번 주 1위 코스 바로가기"/>
-          </View> 
-          <AdBanner/>
+    <View style={styles.container}>
+      <HomeTree navigation={navigation} />
+      <View style={styles.wrapper}>
+        <Shortcut title="나의 숲 바로가기" />
+        <Shortcut title="이번 주 1위 코스 바로가기" />
       </View>
+      {/* <AdBanner/> */}
+    </View>
   );
 };
 

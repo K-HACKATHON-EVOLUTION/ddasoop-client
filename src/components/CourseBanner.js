@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import { Image } from 'react-native';
 
 const Container = styled.TouchableOpacity`
-    background-color: gray;
+    background-color: lightgray;
     height: 80px;
     align-items: center;
     justify-content: center;

@@ -27,7 +27,7 @@ const uploadImage = async uri => {
     const user = Auth.currentUser;
     const ref = firebase.storage().ref(`/profile/${user.uid}/photo.png`);
     const snapshot = await ref.put(blob, { contentType: 'image/png' });
-    
+
     blob.close();
     return await snapshot.ref.getDownloadURL();
 };
@@ -37,11 +37,20 @@ export const signup = async ({ email, password, name, photoUrl }) => {
     const storageUrl = photoUrl.startsWith('https')
         ? photoUrl
         : await uploadImage(photoUrl);
+    console.log(storageUrl);
     await user.updateProfile({
         displayName: name,
         photoURL: storageUrl,
     })
     return user;
+};
+
+export const createStorageUrl = async (req, photoUrl) => {
+    const storageUrl = photoUrl.startsWith('https')
+        ? photoUrl
+        : await uploadImage(photoUrl);
+    req["forestImg"] = storageUrl;
+    return req;
 };
 
 export const db = firebase.firestore();
